@@ -2,6 +2,7 @@ import Home from "../../View/Home";
 import SigIn from "../../View/SigIn";
 import SignUp from "../../View/SignUp";
 
+const initalRouteName = 'Home';
 
 const screens = {
     'Home': Home,
@@ -15,4 +16,4 @@ const createScreensStack = (Stack) => {
     })
 }
 
-export {createScreensStack};
+export {createScreensStack, initalRouteName};
