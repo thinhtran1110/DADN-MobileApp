@@ -12,4 +12,4 @@ const color = {
 
 }
 
-export default  color;
+export default color;

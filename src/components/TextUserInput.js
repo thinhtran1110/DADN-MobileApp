@@ -2,7 +2,7 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import React, {userState} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const TextUserInput = ({firstLogo, label, secondLogo, backgroundColor, placeholder, logoColor, onChangeText, secureTextEntry, onPressSecLogo}) => {
+const TextUserInput = ({firstLogo, label, secondLogo, backgroundColor, placeholder, logoColor, onChangeText, secureTextEntry, onPressSecLogo, value}) => {
 
     return (
         <View style={{marginVertical: 10, width: '100%'}}>
@@ -13,7 +13,7 @@ const TextUserInput = ({firstLogo, label, secondLogo, backgroundColor, placehold
                 <View style={{alignItems: 'center', flexDirection: 'row', marginRight: 10, marginLeft: 5, padding: 0}}>
                     <Icon name={firstLogo} style={{fontSize: 20, color: logoColor}}></Icon>
                 </View>
-                <TextInput style={{flex: 1, fontSize: 15, padding: 0}} placeholder={placeholder} onChangeText={onChangeText} secureTextEntry={secureTextEntry}></TextInput>
+                <TextInput style={{flex: 1, fontSize: 15, padding: 0}} placeholder={placeholder} onChangeText={onChangeText} secureTextEntry={secureTextEntry} value={value}></TextInput>
                 
                 {
                     secondLogo  ? 

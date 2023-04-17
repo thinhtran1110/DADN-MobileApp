@@ -35,6 +35,7 @@ const SigIn = () => {
                 backgroundColor={color.input} 
                 logoColor={'#000'} 
                 onChangeText={text => setUsername(text)}
+                value={username}
               />
 
               <TextUserInput 
@@ -47,6 +48,7 @@ const SigIn = () => {
                 secureTextEntry={isPasswordHiding} 
                 onPressSecLogo={() => setIsPasswordHiding(prev => !prev)}
                 onChangeText={(text) => setPassword(text)}
+                value={password}
               />
 
               <View style={{alignItems: 'flex-end', marginTop: 10}}>
@@ -54,6 +56,7 @@ const SigIn = () => {
                   <Text>Forgot password?</Text>
                 </TouchableOpacity>
               </View>
+
             </KeyboardAvoidingWrapper>
 
             <TouchableOpacity style={{width: '50%', height: 50, position: 'absolute', bottom: -25}} activeOpacity={0.85} onPress={login}>
@@ -61,6 +64,7 @@ const SigIn = () => {
                   <Text style={{color: '#fff', textTransform: 'uppercase', fontFamily: 'Markazi Text', fontWeight: '400', fontSize: 15 }}>Login now</Text>
                 </View> 
             </TouchableOpacity>
+            
             
         </View>
       </SafeAreaView>

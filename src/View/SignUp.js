@@ -40,6 +40,7 @@ const SignUp = () => {
                 backgroundColor={color.input} 
                 logoColor={'#000'} 
                 onChangeText={text => setUsername(text)}
+                value={username}
               />
 
               <TextUserInput 
@@ -52,6 +53,7 @@ const SignUp = () => {
                 secureTextEntry={isPasswordHiding} 
                 onPressSecLogo={() => setIsPasswordHiding(prev => !prev)}
                 onChangeText={(text) => setPassword(text)} 
+                value={password}
               />
 
               <TextUserInput 
@@ -64,6 +66,7 @@ const SignUp = () => {
                 secureTextEntry={isConfirmPasswordHiding} 
                 onPressSecLogo={() => setIsConfirmPasswordHiding(prev => !prev)}
                 onChangeText={(text) => setConfirmPassword(text)}
+                value={confirmPassword}
               />
 
               <TextUserInput 
@@ -73,6 +76,7 @@ const SignUp = () => {
                 backgroundColor={color.input} 
                 logoColor={'#000'} 
                 onChangeText={text => setApiKey(text)}
+                value={apiKey}
               />
             </KeyboardAvoidingWrapper>
 

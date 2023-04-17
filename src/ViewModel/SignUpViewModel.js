@@ -1,5 +1,8 @@
 import { View, Text, Alert } from 'react-native'
 import React, {useState} from 'react'
+import axios from 'axios';
+import StoreService from '../services/storeService';
+import config from '../config/config';
 
 
 const SignUpViewModel = () => {
@@ -9,9 +12,56 @@ const SignUpViewModel = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isConfirmPasswordHiding, setIsConfirmPasswordHiding] = useState(true);
     const [apiKey, setApiKey] = useState('');
-    const register = () => {
-        Alert.alert(`${username} ${password} ${confirmPassword} ${apiKey}`);
+    const register = async () => {
+        try {
+            const invalidList = validateForm();
+            if(invalidList.length != 0){
+                let alertString = invalidList.reduce((prepStr, cur) => {
+                    const res = prepStr + '- ' + cur + '\n';
+                    return res;
+                }, '');
+                Alert.alert(alertString);
+                return;
+            }
+
+            const res = await axios.post(
+                `${config.serverAddress}/auth/signup`,
+                {
+                    username,
+                    password,
+                    adafruitToken: apiKey
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }
+            )
+            .finally(() => {
+                setUsername('');
+                setPassword('');
+                setConfirmPassword('');
+                setApiKey('');
+            })
+
+            const tokens = res.data;
+            await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
+        }
+        catch(err){
+            if(err){
+                console.log(err.response.data);
+            }
+        }
     }
+
+    const validateForm = () => {
+        const invalidList = [];
+        if(password != confirmPassword){
+            invalidList.push('Confirm password failed');
+        }
+        return invalidList;
+    }
+
     return {
         username,
         password,
@@ -29,4 +79,4 @@ const SignUpViewModel = () => {
     }
 }
 
-export default SignUpViewModel
+export default SignUpViewModel;
