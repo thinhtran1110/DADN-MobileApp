@@ -5,7 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import TextUserInput from '../components/TextUserInput'
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper'
 import useSignUpViewModel from '../ViewModel/SignUpViewModel'
-const SignUp = () => {
+import { LoadingContext } from '../App'
+const SignUp = ({navigation}) => {
   const {
     username,
     password,
@@ -22,7 +23,10 @@ const SignUp = () => {
     register,
   } = useSignUpViewModel();
 
-
+  const {
+    isLoading,
+    setIsLoading
+  } = LoadingContext;
     return (
     <View style={{flex: 1, backgroundColor: color.mainBackground}}>
       <SafeAreaView style={{flex: 1, marginHorizontal: '5%'}}>
@@ -80,7 +84,18 @@ const SignUp = () => {
               />
             </KeyboardAvoidingWrapper>
 
-            <TouchableOpacity style={{width: '50%', height: 50, position: 'absolute', bottom: -25}} activeOpacity={0.85} onPress={register}>
+            <TouchableOpacity 
+              style={{width: '50%', height: 50, position: 'absolute', bottom: -25}} 
+              activeOpacity={0.85} 
+              onPress={() => {
+                setIsLoading(true);
+                setTimeout(async () => {
+                  await register(() => navigation.replace('Garden'));
+                  setIsLoading(false);
+                }, 0)
+              }
+
+            }>
                 <View style={{width: '100%', height: '100%', backgroundColor: color.primaryButton, borderRadius: 100, justifyContent: 'center', alignItems: 'center'}}>
                   <Text style={{color: '#fff', textTransform: 'uppercase', fontFamily: 'Markazi Text', fontWeight: '400', fontSize: 15 }}>Register Now</Text>
                 </View> 
@@ -92,4 +107,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default SignUp;

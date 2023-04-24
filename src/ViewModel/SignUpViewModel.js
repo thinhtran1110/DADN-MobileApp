@@ -12,7 +12,7 @@ const SignUpViewModel = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isConfirmPasswordHiding, setIsConfirmPasswordHiding] = useState(true);
     const [apiKey, setApiKey] = useState('');
-    const register = async () => {
+    const register = async (navigateFunc) => {
         try {
             const invalidList = validateForm();
             if(invalidList.length != 0){
@@ -46,11 +46,14 @@ const SignUpViewModel = () => {
 
             const tokens = res.data;
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
+            navigateFunc();
         }
         catch(err){
-            if(err){
+            if(err.response){
                 console.log(err.response.data);
+                return;
             }
+            console.log(err);
         }
     }
 

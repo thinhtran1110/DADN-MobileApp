@@ -9,7 +9,8 @@ const color = {
     inputIcon: '#000',
     inputPlaceholder: 'rgba(0,0,0,0.5)',
     inputLabel: 'rgba(0,0,0,0.8)',
-
+    navigationBar: '#A0C674',
+    gardenElement: '#68A225',
 }
 
 export default color;

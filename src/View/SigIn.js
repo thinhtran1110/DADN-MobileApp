@@ -1,12 +1,14 @@
 import { View, Text, Button, TouchableOpacity, TouchableHighlight, TextInput } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import color from '../config/common/color'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import TextUserInput from '../components/TextUserInput'
 import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper'
 import useSignInViewModel from '../ViewModel/SignInViewModel'
+import { LoadingContext } from '../App'
 
-const SigIn = () => {
+
+const SigIn = ({navigation}) => {
   const {
     username,
     password,
@@ -17,6 +19,10 @@ const SigIn = () => {
     login
   } = useSignInViewModel();
 
+  const {
+    isLoading,
+    setIsLoading
+  } = useContext(LoadingContext);
 
     return (
     <View style={{flex: 1, backgroundColor: color.mainBackground}}>
@@ -51,7 +57,10 @@ const SigIn = () => {
                 value={password}
               />
 
-              <View style={{alignItems: 'flex-end', marginTop: 10}}>
+              <View style={{
+                alignItems: 'flex-end', 
+                marginTop: 10
+              }}>
                 <TouchableOpacity>
                   <Text>Forgot password?</Text>
                 </TouchableOpacity>
@@ -59,8 +68,29 @@ const SigIn = () => {
 
             </KeyboardAvoidingWrapper>
 
-            <TouchableOpacity style={{width: '50%', height: 50, position: 'absolute', bottom: -25}} activeOpacity={0.85} onPress={login}>
-                <View style={{width: '100%', height: '100%', backgroundColor: color.primaryButton, borderRadius: 100, justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity style={{
+              width: '50%', 
+              height: 50, 
+              position: 'absolute', 
+              bottom: -25
+            }} 
+              activeOpacity={0.85}
+              onPress={() => {
+                setIsLoading(true);
+                setTimeout(async () =>{
+                  await login(() => navigation.replace('Garden'));
+                  setIsLoading(false);
+                }, 0)                
+              }}
+            >
+                <View style={{
+                  width: '100%', 
+                  height: '100%', 
+                  backgroundColor: color.primaryButton, 
+                  borderRadius: 100, 
+                  justifyContent: 'center', 
+                  alignItems: 'center'}}
+                >
                   <Text style={{color: '#fff', textTransform: 'uppercase', fontFamily: 'Markazi Text', fontWeight: '400', fontSize: 15 }}>Login now</Text>
                 </View> 
             </TouchableOpacity>
