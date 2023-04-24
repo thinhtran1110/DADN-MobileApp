@@ -1,14 +1,8 @@
-import { View, Text, TouchableOpacity, ScrollView, Image, Alert } from 'react-native'
+import { View, Text } from 'react-native'
 import React, { useContext, useEffect } from 'react'
-import color from '../config/common/color'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import NavigationBar from '../components/NavigationBar'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import NotificationButton from '../components/NotificationButton'
-import image from '../assets/image'
-import GardenElement from '../components/GardenElement'
+
 import GardenElementsList from '../components/GardenElementsList'
-import StoreService from '../services/storeService'
 import GardenViewModel from '../ViewModel/GardenViewModel'
 import { LoadingContext } from '../App'
 import GeneralFrame from '../components/GeneralFrame'
