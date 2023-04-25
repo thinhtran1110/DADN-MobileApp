@@ -22,7 +22,7 @@ const Setting = ({navigation}) => {
   );
 
   return (
-    <GeneralFrame screenTitle={'Your Setting'}>
+    <GeneralFrame screenTitle={'Your Setting'} hideBack={false}>
         <View style={{backgroundColor: '#DCDCDC', borderWidth: 1, borderRadius: 100, flexDirection: 'row', alignItems: 'center', marginVertical: 10}}>
             <Icon name={'search'} style={{ padding: 10 }}></Icon>
             <TextInput
