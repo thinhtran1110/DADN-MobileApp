@@ -3,8 +3,9 @@ import Garden from "../../View/Garden";
 import Home from "../../View/Home";
 import SigIn from "../../View/SigIn";
 import SignUp from "../../View/SignUp";
+import Setting from "../../View/Setting";
 
-const initalRouteName = 'Home';
+const initalRouteName = 'Garden';
 
 const screens = {
     'Home': Home,
@@ -12,6 +13,7 @@ const screens = {
     'SignUp': SignUp,
     'Garden': Garden,
     'EnvironmentCondition' : EnvironmentCondition,
+    'Setting': Setting,
 }
 
 const createScreensStack = (Stack) => {
