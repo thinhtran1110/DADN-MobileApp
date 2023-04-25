@@ -5,7 +5,7 @@ import SigIn from "../../View/SigIn";
 import SignUp from "../../View/SignUp";
 import Setting from "../../View/Setting";
 
-const initalRouteName = 'Garden';
+const initalRouteName = 'Home';
 
 const screens = {
     'Home': Home,

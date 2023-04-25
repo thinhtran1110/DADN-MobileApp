@@ -1,19 +1,29 @@
 import ReactNative ,{ View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import GeneralFrame from '../components/GeneralFrame';
 import EnvironmentConditionViewModel from '../ViewModel/EnvironmentConditionViewModel';
 import EnvironmentTag from '../components/EnvironmentTag';
 import color from '../config/common/color';
 import ChartTag from '../components/ChartTag';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const EnvironmentCondition = ({navigation, route}) => {
-    const { groupKey, name } = route.params || {groupKey: 'tomato', name: 'Tomato'};
+    const { groupKey, name } = route.params;
     const {
         isActiveNow,
         setIsActiveNow,
-    } = EnvironmentConditionViewModel();
+        temp,
+        airHumi,
+        soilMtr,
+        refreshScreen,
+    } = EnvironmentConditionViewModel(groupKey);
 
+    useFocusEffect(
+        useCallback(() => {
+            return refreshScreen();
+        },[])
+    );
     return (
         <GeneralFrame screenTitle={`${name}`}>
             <View style={{
@@ -71,56 +81,19 @@ const EnvironmentCondition = ({navigation, route}) => {
                     <>
                         <ChartTag 
                             name={'Temperature'} 
-                            data={[
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                            ]}
+                            data={temp}
                             unit={'°C'}
                         ></ChartTag>
+
                         <ChartTag 
                             name={'Air Humidity'} 
-                            data={[
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                                Math.floor(Math.random() * 100),
-                            ]}
-
+                            data={airHumi}
                             unit={'%'}
-                        ></ChartTag><ChartTag 
+                        ></ChartTag>
+                        
+                        <ChartTag 
                         name={'Soid Moisture'} 
-                        data={[
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                            Math.floor(Math.random() * 100),
-                        ]}
+                        data={soilMtr}
                         unit={'%'}
                         ></ChartTag>
                     </>

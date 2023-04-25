@@ -34,7 +34,7 @@ const GardenElement = (props) => {
 
                 <TouchableOpacity 
                     onPress={() => {
-                        navigation.navigate('EnvironmentCondition', { groupKey, name });
+                        navigation.navigate('EnvironmentCondition', { groupKey: groupKey, name: name });
                     }}
                 >
                     <View style={{

@@ -34,11 +34,10 @@ const Garden = ({navigation}) => {
                         onChangeText={onChangeText}
                         value={text}
                         placeholder="Search"
-                        keyboardType="text"
                     />
-                </View>
+            </View>
 
-                <GardenElementsList elementsList={groups}></GardenElementsList>
+            <GardenElementsList elementsList={groups}></GardenElementsList>
         </GeneralFrame>
     )
 }
