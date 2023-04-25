@@ -19,7 +19,7 @@ const GardenElementsList = (props) => {
                         }
                     });
                     
-                    return <GardenElement key={ele.key} temperature={temperature} soilMoisture={soilMoisture} name={ele.name}></GardenElement>
+                    return <GardenElement key={ele.key} temperature={temperature} soilMoisture={soilMoisture} name={ele.name} groupKey={ele.groupKey}></GardenElement>
                 })
                 
             }

@@ -1,3 +1,4 @@
+import EnvironmentCondition from "../../View/EnvironmentCondition";
 import Garden from "../../View/Garden";
 import Home from "../../View/Home";
 import SigIn from "../../View/SigIn";
@@ -10,6 +11,7 @@ const screens = {
     'SignIn': SigIn,
     'SignUp': SignUp,
     'Garden': Garden,
+    'EnvironmentCondition' : EnvironmentCondition,
 }
 
 const createScreensStack = (Stack) => {

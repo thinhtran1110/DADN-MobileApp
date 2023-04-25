@@ -1,31 +1,25 @@
 import { View, Text } from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect  } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import GardenElementsList from '../components/GardenElementsList'
 import GardenViewModel from '../ViewModel/GardenViewModel'
 import { LoadingContext } from '../App'
 import GeneralFrame from '../components/GeneralFrame'
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const Garden = ({navigation}) => { 
     const {
-        getGroups,
         groups,
-        setGroups
-
+        refreshScreen,
     } = GardenViewModel();
 
-    const {
-        setIsLoading,
-    } = useContext(LoadingContext);
-
-    useEffect(() => {
-        setTimeout(async () =>{
-            const elementsList = await getGroups();
-            setGroups(elementsList);
-        },0)
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            return refreshScreen();
+        },[])
+    );
 
 
     return (

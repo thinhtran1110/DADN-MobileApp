@@ -3,13 +3,15 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import config from '../config/config';
 import StoreService from '../services/storeService';
+import { useNavigation } from '@react-navigation/native';
 
 
 const SignInViewModel = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isPasswordHiding, setIsPasswordHiding] = useState(true);
-    const login = async (navigateFunc) => {
+    const navigation = useNavigation();
+    const login = async (nextScreen) => {
         try{
             const res = await axios.post(
             `${config.serverAddress}/auth/login`,
@@ -30,7 +32,7 @@ const SignInViewModel = () => {
         
             const tokens = res.data;
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
-            navigateFunc();
+            navigation.navigate(nextScreen)
         }
         catch(err){
             if(err.response){

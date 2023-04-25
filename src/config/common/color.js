@@ -11,6 +11,9 @@ const color = {
     inputLabel: 'rgba(0,0,0,0.8)',
     navigationBar: '#A0C674',
     gardenElement: '#68A225',
+    tagButton: 'rgba(217, 217, 217, 0.4)',
+    outLimit: '#C55423',
+    inLimit: '#A2C523'
 }
 
 export default color;

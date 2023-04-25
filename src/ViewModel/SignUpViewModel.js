@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 import axios from 'axios';
 import StoreService from '../services/storeService';
 import config from '../config/config';
+import { useNavigation } from '@react-navigation/native';
 
 
 const SignUpViewModel = () => {
@@ -12,7 +13,9 @@ const SignUpViewModel = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isConfirmPasswordHiding, setIsConfirmPasswordHiding] = useState(true);
     const [apiKey, setApiKey] = useState('');
-    const register = async (navigateFunc) => {
+    const navigation = useNavigation();
+
+    const register = async (nextScreen) => {
         try {
             const invalidList = validateForm();
             if(invalidList.length != 0){
@@ -46,7 +49,7 @@ const SignUpViewModel = () => {
 
             const tokens = res.data;
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
-            navigateFunc();
+            navigation.navigate(nextScreen);
         }
         catch(err){
             if(err.response){

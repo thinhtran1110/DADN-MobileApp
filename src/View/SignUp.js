@@ -90,7 +90,7 @@ const SignUp = ({navigation}) => {
               onPress={() => {
                 setIsLoading(true);
                 setTimeout(async () => {
-                  await register(() => navigation.replace('Garden'));
+                  await register('Garden');
                   setIsLoading(false);
                 }, 0)
               }

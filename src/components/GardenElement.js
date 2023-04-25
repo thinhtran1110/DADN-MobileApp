@@ -2,8 +2,10 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import color  from '../config/common/color'
 import image from '../assets/image'
+import { useNavigation } from '@react-navigation/native'
 const GardenElement = (props) => {
-    const { temperature, soilMoisture, name } = props;
+    const { temperature, soilMoisture, name, groupKey } = props;
+    const navigation = useNavigation();
     return (
         <View style={{
             backgroundColor: color.gardenElement,
@@ -30,12 +32,15 @@ const GardenElement = (props) => {
                 <Text style={{color: '#222222', fontFamily: 'Inria Serif', fontWeight: '400', fontSize: 16}}>Soil moisture:  {soilMoisture}%</Text>
 
 
-                <TouchableOpacity>
+                <TouchableOpacity 
+                    onPress={() => {
+                        navigation.navigate('EnvironmentCondition', { groupKey, name });
+                    }}
+                >
                     <View style={{
-                        backgroundColor: '#D9D9D9',
+                        backgroundColor: color.tagButton,
                         borderRadius: 100,
                         borderWidth: 1,
-                        opacity: 0.6,
                         paddingVertical: 2,
                         paddingHorizontal: 25,
                         margin: 10

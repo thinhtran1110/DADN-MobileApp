@@ -78,7 +78,7 @@ const SigIn = ({navigation}) => {
               onPress={() => {
                 setIsLoading(true);
                 setTimeout(async () =>{
-                  await login(() => navigation.replace('Garden'));
+                  await login('Garden');
                   setIsLoading(false);
                 }, 0)                
               }}
