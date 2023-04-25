@@ -1,14 +1,14 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import ReactNative ,{ View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import GeneralFrame from '../components/GeneralFrame';
 import EnvironmentConditionViewModel from '../ViewModel/EnvironmentConditionViewModel';
 import EnvironmentTag from '../components/EnvironmentTag';
 import color from '../config/common/color';
-import { LineChart } from 'react-native-chart-kit';
+import ChartTag from '../components/ChartTag';
 
 
 const EnvironmentCondition = ({navigation, route}) => {
-    const { groupKey, name } = route.params;
+    const { groupKey, name } = route.params || {groupKey: 'tomato', name: 'Tomato'};
     const {
         isActiveNow,
         setIsActiveNow,
@@ -69,7 +69,60 @@ const EnvironmentCondition = ({navigation, route}) => {
                     </>
                     :
                     <>
+                        <ChartTag 
+                            name={'Temperature'} 
+                            data={[
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                            ]}
+                            unit={'°C'}
+                        ></ChartTag>
+                        <ChartTag 
+                            name={'Air Humidity'} 
+                            data={[
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                                Math.floor(Math.random() * 100),
+                            ]}
 
+                            unit={'%'}
+                        ></ChartTag><ChartTag 
+                        name={'Soid Moisture'} 
+                        data={[
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                            Math.floor(Math.random() * 100),
+                        ]}
+                        unit={'%'}
+                        ></ChartTag>
                     </>
 
                 }
