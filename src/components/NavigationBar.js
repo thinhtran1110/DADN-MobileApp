@@ -2,16 +2,19 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import color from '../config/common/color';
+import { useNavigation } from '@react-navigation/native';
 
 const NavigationBar = (props) => {
+    const navigation = useNavigation();
+
     const { onPress } = props;
         
     return (
         <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: color.navigationBar}}>
-            <TouchableOpacity >
+            <TouchableOpacity onPress={() => navigation.navigate('Garden')}>
                 <Icon name={'home'} style={style.icon}></Icon>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
                 <Icon name={'cog'} style={style.icon}></Icon>
                 
             </TouchableOpacity>
