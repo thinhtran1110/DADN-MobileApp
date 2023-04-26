@@ -11,6 +11,7 @@ const SignInViewModel = () => {
     const [password, setPassword] = useState('');
     const [isPasswordHiding, setIsPasswordHiding] = useState(true);
     const navigation = useNavigation();
+    const [errorMessage, setErrorMessage] = useState('');
     const login = async (nextScreen) => {
         try{
             const res = await axios.post(
@@ -32,11 +33,13 @@ const SignInViewModel = () => {
         
             const tokens = res.data;
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
-            navigation.navigate(nextScreen)
+            setErrorMessage('');
+            navigation.navigate(nextScreen);
         }
         catch(err){
             if(err.response){
                 console.log(err.response.data);
+                setErrorMessage(err.response.data['message']);
                 return;
             }
             console.log(err);
@@ -50,6 +53,8 @@ const SignInViewModel = () => {
         setPassword,
         setIsPasswordHiding,
         login,
+        errorMessage,
+        setErrorMessage,
     }
 }
 

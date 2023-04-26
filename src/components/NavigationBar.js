@@ -22,7 +22,7 @@ const NavigationBar = (props) => {
                 <Icon name={'list-ul'} style={style.icon}></Icon>
 
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('LogOut')}>
                 <Icon name={'user'} style={style.icon}></Icon>
             </TouchableOpacity>
         

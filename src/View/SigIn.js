@@ -16,7 +16,9 @@ const SigIn = ({navigation}) => {
     setUsername,
     setPassword,
     setIsPasswordHiding,
-    login
+    login,
+    errorMessage,
+    setErrorMessage,
   } = useSignInViewModel();
 
   const {
@@ -66,8 +68,11 @@ const SigIn = ({navigation}) => {
                 </TouchableOpacity>
               </View>
 
+            <Text style={{textAlign: 'center', color: 'red', fontSize: 15, marginTop: 30}}>{errorMessage}</Text>
+
             </KeyboardAvoidingWrapper>
 
+            
             <TouchableOpacity style={{
               width: '50%', 
               height: 50, 
