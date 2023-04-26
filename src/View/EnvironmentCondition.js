@@ -24,6 +24,8 @@ const EnvironmentCondition = ({navigation, route}) => {
             return refreshScreen();
         },[])
     );
+
+    console.log(temp, airHumi, soilMtr);
     return (
         <GeneralFrame screenTitle={`${name}`}>
             <View style={{

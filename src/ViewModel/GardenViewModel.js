@@ -32,8 +32,10 @@ const GardenViewModel = () => {
 
     const refreshScreen = () => {
         setTimeout(async () =>{
+            setIsLoading(prev => true);
             const elementsList = await getGroups();
             setGroups(elementsList);
+            setIsLoading(prev => false);
         },0)
         const intervalCall = setInterval(async () => {
             setIsLoading(true);

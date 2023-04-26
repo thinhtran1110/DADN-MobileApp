@@ -6,9 +6,9 @@ import { LoadingContext } from '../App';
 import config from '../config/config';
 const EnvironmentConditionViewModel = (groupKey) => {
     const [isActiveNow, setIsActiveNow] = useState(true);
-    const [temp, setTemp] = useState([])
-    const [airHumi, setAirHumi] = useState([])
-    const [soilMtr, setSoilMtr] = useState([])
+    const [temp, setTemp] = useState([]);
+    const [airHumi, setAirHumi] = useState([]);
+    const [soilMtr, setSoilMtr] = useState([]);
     const {
         setIsLoading,
     } = useContext(LoadingContext);
@@ -78,6 +78,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
             return retData.slice(0, Math.min(12, data.length) -1).reverse()
         }
         setTimeout(async () =>{
+            setIsLoading(prev => true);
             const tempPromise = getTemp();
             const airHumiPromise = getAirHumi();
             const soilMtrPromise = getSoidMtr();
@@ -85,7 +86,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
             setTemp(slice(Temp));
             setAirHumi(slice(AirHumi));
             setSoilMtr(slice(SoilMtr));
-            setIsLoading(false);
+            setIsLoading(prev => false);
         },0)
         const intervalCall = setInterval(async () => {
             setIsLoading(true);
