@@ -30,7 +30,6 @@ const Setting = ({navigation}) => {
               onChangeText={onChangeText}
               value={text}
               placeholder="Search"
-              keyboardType="text"
             />
         </View>
 
