@@ -72,34 +72,37 @@ const EnvironmentConditionViewModel = (groupKey) => {
         }
     }
 
-    const refreshScreen = () => {
+    const loadData = async () =>{
         const slice = (data) => {
             let retData = data;
             return retData.slice(0, Math.min(12, data.length) -1).reverse()
         }
+        const tempPromise = getTemp();
+        const airHumiPromise = getAirHumi();
+        const soilMtrPromise = getSoidMtr();
+        const [Temp, AirHumi, SoilMtr] =  await Promise.all([tempPromise, airHumiPromise, soilMtrPromise])
+        setTemp(slice(Temp));
+        setAirHumi(slice(AirHumi));
+        setSoilMtr(slice(SoilMtr));
+        return [Temp, AirHumi, SoilMtr];
+    }
+
+    const refreshScreen = () => {
         setTimeout(async () =>{
             setIsLoading(prev => true);
-            const tempPromise = getTemp();
-            const airHumiPromise = getAirHumi();
-            const soilMtrPromise = getSoidMtr();
-            const [Temp, AirHumi, SoilMtr] =  await Promise.all([tempPromise, airHumiPromise, soilMtrPromise])
-            setTemp(slice(Temp));
-            setAirHumi(slice(AirHumi));
-            setSoilMtr(slice(SoilMtr));
+            await loadData();
             setIsLoading(prev => false);
         },0)
         const intervalCall = setInterval(async () => {
-            setIsLoading(true);
-            const tempPromise = getTemp();
-            const airHumiPromise = getAirHumi();
-            const soilMtrPromise = getSoidMtr();
-            const [Temp, AirHumi, SoilMtr] =  await Promise.all([tempPromise, airHumiPromise, soilMtrPromise])
-            setTemp(slice(Temp));
-            setAirHumi(slice(AirHumi));
-            setSoilMtr(slice(SoilMtr));
-            setIsLoading(false);
+            await loadData();
         }, 30000);
         return () => clearInterval(intervalCall);
+    }
+
+    const onRefresh = async () => {
+        setIsLoading(true);
+        await loadData();
+        setIsLoading(false);
     }
 
     return {
@@ -109,6 +112,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
         airHumi,
         soilMtr,
         refreshScreen,
+        onRefresh,
     }
 
 

@@ -17,6 +17,7 @@ const EnvironmentCondition = ({navigation, route}) => {
         airHumi,
         soilMtr,
         refreshScreen,
+        onRefresh
     } = EnvironmentConditionViewModel(groupKey);
 
     useFocusEffect(
@@ -25,9 +26,9 @@ const EnvironmentCondition = ({navigation, route}) => {
         },[])
     );
 
-    console.log(temp, airHumi, soilMtr);
     return (
-        <GeneralFrame screenTitle={`${name}`}>
+        <GeneralFrame screenTitle={`${name}`} onRefresh={onRefresh}>
+            <View style={{flex: 1}}>
             <View style={{
                 flexDirection: 'row',
                 width: '100%',
@@ -51,18 +52,16 @@ const EnvironmentCondition = ({navigation, route}) => {
                     <>
                         <EnvironmentTag
                             header={'Temperature'}
-                            backgroundColor={color.outLimit}
-                            currentValue={24}
+                            currentValue={temp.at(-1)}
                             unit={'°C'}
                             from={20}
-                            to={24}
+                            to={26}
                             isCustomize={true}
                         ></EnvironmentTag>
 
                         <EnvironmentTag
                             header={'Air Humidity'}
-                            backgroundColor={color.inLimit}
-                            currentValue={65}
+                            currentValue={airHumi.at(-1)}
                             unit={'%'}
                             from={60}
                             to={70}
@@ -71,8 +70,7 @@ const EnvironmentCondition = ({navigation, route}) => {
 
                         <EnvironmentTag
                             header={'Soid Moisture'}
-                            backgroundColor={color.inLimit}
-                            currentValue={70}
+                            currentValue={soilMtr.at(-1)}
                             unit={'%'}
                             from={60}
                             to={70}
@@ -81,27 +79,32 @@ const EnvironmentCondition = ({navigation, route}) => {
                     </>
                     :
                     <>
-                        <ChartTag 
-                            name={'Temperature'} 
-                            data={temp}
-                            unit={'°C'}
-                        ></ChartTag>
+                        <View style={{flex: 1}}>
+                            <ChartTag 
+                                name={'Temperature'} 
+                                data={temp}
+                                unit={'°C'}
+                            ></ChartTag>
 
-                        <ChartTag 
-                            name={'Air Humidity'} 
-                            data={airHumi}
+                            <ChartTag 
+                                name={'Air Humidity'} 
+                                data={airHumi}
+                                unit={'%'}
+                            ></ChartTag>
+                            
+                            <ChartTag 
+                            name={'Soil Moisture'} 
+                            data={soilMtr}
                             unit={'%'}
-                        ></ChartTag>
+                            ></ChartTag>
+                        </View>
                         
-                        <ChartTag 
-                        name={'Soid Moisture'} 
-                        data={soilMtr}
-                        unit={'%'}
-                        ></ChartTag>
                     </>
 
                 }
             </View>
+            </View>
+            
         </GeneralFrame>
     )
 }

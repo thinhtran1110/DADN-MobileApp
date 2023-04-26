@@ -3,9 +3,9 @@ import color from '../config/common/color'
 import React from 'react'
 
 const EnvironmentTag = (props) => {
-    const { backgroundColor, header, currentValue, from, to, isCustomize, unit} = props;
+    const {header, currentValue, from, to, isCustomize, unit} = props;
     return (
-        <View style={{flex: 1, backgroundColor: backgroundColor, borderRadius: 30, marginBottom: 20, flexDirection: 'row', paddingVertical: 10, alignItems: 'center'}}>
+        <View style={{flex: 1, backgroundColor: (from <= currentValue && currentValue <= to) ? color.inLimit : color.outLimit, borderRadius: 30, marginBottom: 20, flexDirection: 'row', paddingVertical: 10, alignItems: 'center'}}>
             <View style={{flex: 3}}>
                 <View style={{alignItems: 'center', borderRightWidth: 1}}>
                     <Text style={{color: '#000', fontSize: 17, fontWeight: 700}}>{header}</Text>

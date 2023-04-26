@@ -30,25 +30,34 @@ const GardenViewModel = () => {
 
     }
 
+    const loadData = async () => {
+        const elementsList = await getGroups();
+        setGroups(elementsList);
+        return elementsList;
+    }
+    
     const refreshScreen = () => {
         setTimeout(async () =>{
             setIsLoading(prev => true);
-            const elementsList = await getGroups();
-            setGroups(elementsList);
+            await loadData();
             setIsLoading(prev => false);
         },0)
         const intervalCall = setInterval(async () => {
-            setIsLoading(true);
-            const elementsList = await getGroups();
-            setGroups(elementsList);
-            setIsLoading(false);
+            await loadData();
         }, 30000);
         return () => clearInterval(intervalCall);
+    }
+
+    const onRefresh = async () => {
+        setIsLoading(true);
+        await loadData();
+        setIsLoading(false);
     }
 
     return {
         groups,
         refreshScreen,
+        onRefresh,
     }
         
 
