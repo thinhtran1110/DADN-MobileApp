@@ -74,7 +74,8 @@ const EnvironmentConditionViewModel = (groupKey) => {
 
     const refreshScreen = () => {
         const slice = (data) => {
-            return data.slice(-Math.min(12, data.length), -1)
+            let retData = data;
+            return retData.slice(0, Math.min(12, data.length) -1).reverse()
         }
         setTimeout(async () =>{
             const tempPromise = getTemp();
