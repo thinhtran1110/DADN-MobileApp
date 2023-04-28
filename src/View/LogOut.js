@@ -3,9 +3,13 @@ import React from 'react'
 import GeneralFrame from '../components/GeneralFrame'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
+import LogOutViewModel from '../ViewModel/LogOutViewModel';
 
 
 const LogOut = () => {
+  const {
+    logout,
+  } = LogOutViewModel();
   return (
     <GeneralFrame screenTitle={'Your Profile'} hideNotification={false}>
       <View style={{borderBottomWidth: 1, marginTop: 15}}></View>
@@ -22,7 +26,7 @@ const LogOut = () => {
             paddingHorizontal: 25, 
             marginBottom: 30
           }}
-          onPress={() => {}}
+          onPress={logout}
         >
           <Text style={{color: '#000', fontSize: 13, fontWeight: 'bold'}}>Log out</Text>
           <Icon name={'sign-out-alt'} style={{color: '#000', marginLeft: 10, fontSize: 20}}></Icon>

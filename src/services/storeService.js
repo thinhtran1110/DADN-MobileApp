@@ -26,6 +26,16 @@ export default class StoreService {
         }
     }
 
+    static async removeItem(key){
+        try{
+            await AsyncStorage.removeItem(key);
+        }
+        catch(err){
+            if(err){
+                console.log(err);
+            }
+        }
+    }
     static async storeTokens(accessToken, refreshToken){
         const tokens = {accessToken, refreshToken};
         return this.setItem('tokens', tokens);
@@ -34,5 +44,9 @@ export default class StoreService {
     static async loadTokens(){
         const tokens = await this.getItem('tokens');
         return [tokens.accessToken, tokens.refreshToken];
+    }
+
+    static async removeTokens(){
+        return this.removeItem('tokens');
     }
 }
