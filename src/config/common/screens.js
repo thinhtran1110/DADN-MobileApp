@@ -4,9 +4,10 @@ import Home from "../../View/Home";
 import SigIn from "../../View/SigIn";
 import SignUp from "../../View/SignUp";
 import Setting from "../../View/Setting";
+import DetailSetting from "../../View/DetailSetting";
 import LogOut from "../../View/LogOut";
 
-const initalRouteName = 'Home';
+const initalRouteName = 'Setting';
 
 const screens = {
     'Home': Home,
@@ -15,6 +16,7 @@ const screens = {
     'Garden': Garden,
     'EnvironmentCondition' : EnvironmentCondition,
     'Setting': Setting,
+    'DetailSetting': DetailSetting,
     'LogOut' : LogOut,
 }
 
