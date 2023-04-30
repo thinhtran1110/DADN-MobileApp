@@ -1,52 +1,69 @@
-import { StyleSheet, Text, TouchableOpacity, View, Modal, SafeAreaView } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Modal, SafeAreaView, Pressable, Alert, TouchableWithoutFeedback } from 'react-native'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Menu, MenuItem } from 'react-native-material-menu'
 
 const PopupMenu = () => {
 
-  const [visible, setVisible] = React.useState(false)
+    const [visible, setVisible] = React.useState(false)
+    const navigation = useNavigation()
+   
+    const hideMenu = () => setVisible(false);
 
-  const nevigation = useNavigation()
+    const showMenu = () => setVisible(true);
 
-  const options = [
-    {
-        title: "Adjust Temperature",
-        action: () => alert('Temp')
-    },
-    {
-        title: "Irrigate Soil",
-        action: () => alert('Irrigate')
-    },
-    {
-        title: "Adjust Temperature",
-        action: () => alert('Temp')
-    },
-    {
-        title: "Irrigate Soil",
-        action: () => alert('Irrigate')
-    }
-  ]
+    const options = [
+        {
+            title: "Adjust Temperature",
+            action: () => Alert.alert('Temp')
+        },
+        {
+            title: "Irrigate Soil",
+            action: () => Alert.alert('Irrigate')
+        },
+        {
+            title: "Adjust Temperature",
+            action: () => Alert.alert('Temp')
+        },
+        {
+            title: "Irrigate Soil",
+            action: () => Alert.alert('Irrigate')
+        }
+    ]
 
-  return (
-    <>
-        <TouchableOpacity style={{alignItems:'center', justifyContent:'center' }} onPress={() => setVisible(true)}>
-            <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000' }}></Icon>
-        </TouchableOpacity>
-        <Modal transparent visible={visible}>
-            <SafeAreaView style={{ flex:1 }} onTouchStart={() => setVisible(false)}>
-                <View style={ styles.popup }>
-                    {
-                        options.map((op, i) => {
-                            <TouchableOpacity style={ styles.option } key={i} onPress={() => op.action}>
-                                <Text>{op.title}</Text>
-                            </TouchableOpacity>
-                        })
-                    }
-                </View>
-            </SafeAreaView>
-        </Modal>
-    </>
+    return (
+            <Menu
+                visible={visible}
+                anchor={
+                    <TouchableOpacity onPress={showMenu}>   
+                        <View 
+                            style={{alignItems:'center', justifyContent:'center'}} 
+                        >
+                            <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000' }}></Icon>
+                        </View>
+                    </TouchableOpacity>
+                }
+                onRequestClose={hideMenu}
+                style={styles.popup}
+            >
+                {
+                            options.map((op, i) => {
+                                return (
+                                    <MenuItem 
+                                        style={ styles.option } key={i} 
+                                        onPress={() => {
+                                            op.action(); 
+                                            hideMenu();
+                                        }}
+                                    >
+                                        <Text style={{color: '#000'}}>{op.title}</Text>
+                                    </MenuItem>
+                                )
+                                
+                            })
+                        }
+            </Menu>
   )
 }
 
@@ -57,16 +74,16 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         borderColor: 'red',
         borderWidth: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         paddingHorizontal: 10,
-        position: 'absolute',
-        zIndex: 2,
     },
     option: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        // flexDirection: 'row',
+        // justifyContent: 'space-between',
+        // alignItems: 'center',
         paddingVertical: 7,
-        borderBottomColor: '#ccc'
-    }
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1
+    },
+
 })

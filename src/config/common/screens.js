@@ -7,7 +7,7 @@ import Setting from "../../View/Setting";
 import DetailSetting from "../../View/DetailSetting";
 import LogOut from "../../View/LogOut";
 
-const initalRouteName = 'Setting';
+const initalRouteName = 'Home';
 
 const screens = {
     'Home': Home,
