@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import NavigationBar from './NavigationBar'
 import NotificationButton from './NotificationButton'
 import BackButton from './BackButton'
+import PopupMenu from './PopupMenu'
 import color from '../config/common/color'
 
 const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh = async () => {return;}}) => {
@@ -14,7 +15,7 @@ const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification 
         setRefreshing(false);
     }
     return (
-        <View style={{backgroundColor: color.mainBackground, flex: 1}}>
+        <View style={{backgroundColor: color.mainBackground, flex:1 }}>
                 <SafeAreaView style={{flex: 1, marginHorizontal: 25}}>
                     <ScrollView 
                         style={{flex: 1}}
@@ -39,13 +40,11 @@ const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification 
                                 : null
                             }
                             
-                            <View style={{ flexDirection:'row',marginTop: '15%'}}>
-                                <Text style={{color: color.primaryLabel, fontFamily: 'Markazi Text', fontWeight: '700', fontSize: 30, textTransform: 'uppercase', width: 320}}>{screenTitle}</Text>
+                            <View style={{ flexDirection:'row',marginTop: '15%' }}>
+                                <Text style={{color: color.primaryLabel, fontFamily: 'Markazi Text', fontWeight: '700', fontSize: 30, textTransform: 'uppercase', width: 335}}>{screenTitle}</Text>
                                 {
-                                    showMenu ?
-                                    <TouchableOpacity style={{ width:40, height:50, alignItems:'center', justifyContent:'center' }}>
-                                        <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000' }}></Icon>
-                                    </TouchableOpacity>
+                                    showMenu ?    
+                                    <PopupMenu/>
                                     : null
                                 }
                             </View>

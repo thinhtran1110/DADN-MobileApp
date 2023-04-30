@@ -23,11 +23,11 @@ const DetailSetting = ({nevigation}) => {
         <GeneralFrame screenTitle={'Your Setting'} showMenu={true}>
           <View style={{alignItems: 'center'}}>
 
-            <EnvironmentSetting name='Temperature' unit='°C'></EnvironmentSetting>
+            <EnvironmentSetting name='Temperature' unit='°C' numFrom='20' numTo='24'></EnvironmentSetting>
 
-            <EnvironmentSetting name='Air Humidity' unit='%'></EnvironmentSetting>
+            <EnvironmentSetting name='Air Humidity' unit='%' numFrom='65' numTo='75'></EnvironmentSetting>
 
-            <EnvironmentSetting name='Soil Moisture' unit='%'></EnvironmentSetting>
+            <EnvironmentSetting name='Soil Moisture' unit='%' numFrom='70' numTo='80'></EnvironmentSetting>
           </View>
         </GeneralFrame>
     </>

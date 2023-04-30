@@ -5,7 +5,7 @@ import RadioButton from './RadioButton'
 
 const EnvironmentSetting = (props) => {
 
-  const {name, unit} = props
+  const {name, unit, numFrom, numTo} = props
 
   const [show, setShow] = React.useState(false)
 
@@ -19,9 +19,9 @@ const EnvironmentSetting = (props) => {
 		text: 'Customize',
   },
 ];
-  const [from, setFrom] = React.useState("")
+  const [from, setFrom] = React.useState(numFrom)
 
-  const [to, setTo] = React.useState("")
+  const [to, setTo] = React.useState(numTo)
   
   return (
     <>
