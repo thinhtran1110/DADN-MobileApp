@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import GeneralFrame from '../components/GeneralFrame'
 import EnvironmentSetting from '../components/EnvironmentSetting'
@@ -21,14 +21,14 @@ const DetailSetting = ({nevigation}) => {
   return (
     <>
         <GeneralFrame screenTitle={'Your Setting'} showMenu={true}>
-          <View style={{alignItems: 'center'}}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{paddingBottom: 10}}>
 
             <EnvironmentSetting name='Temperature' unit='°C' numFrom='20' numTo='24'></EnvironmentSetting>
 
             <EnvironmentSetting name='Air Humidity' unit='%' numFrom='65' numTo='75'></EnvironmentSetting>
 
             <EnvironmentSetting name='Soil Moisture' unit='%' numFrom='70' numTo='80'></EnvironmentSetting>
-          </View>
+          </ScrollView>
         </GeneralFrame>
     </>
   )

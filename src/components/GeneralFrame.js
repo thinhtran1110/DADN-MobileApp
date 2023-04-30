@@ -1,13 +1,12 @@
-import { View, Text, SafeAreaView, ScrollView, RefreshControl, TouchableOpacity } from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, RefreshControl } from 'react-native'
 import React, { useState } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import NavigationBar from './NavigationBar'
 import NotificationButton from './NotificationButton'
 import BackButton from './BackButton'
 import PopupMenu from './PopupMenu'
 import color from '../config/common/color'
 
-const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh = async () => {return;}}) => {
+const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh }) => {
     const [refreshing, setRefreshing] = useState(false);
     const _onRefresh = async () => {
         setRefreshing(true);
@@ -20,10 +19,13 @@ const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification 
                     <ScrollView 
                         style={{flex: 1}}
                         refreshControl={
+                            onRefresh ? 
                             <RefreshControl
                                 refreshing={refreshing}
                                 onRefresh={_onRefresh}
                             ></RefreshControl>
+                            :
+                            null
                         }
                         contentContainerStyle={{flex: 1}}
                     >
