@@ -16,19 +16,11 @@ const PopupMenu = () => {
     const options = [
         {
             title: "Adjust Temperature",
-            action: () => Alert.alert('Temp')
+            action: () => navigation.navigate('ScheduledFan')
         },
         {
             title: "Irrigate Soil",
-            action: () => Alert.alert('Irrigate')
-        },
-        {
-            title: "Adjust Temperature",
-            action: () => Alert.alert('Temp')
-        },
-        {
-            title: "Irrigate Soil",
-            action: () => Alert.alert('Irrigate')
+            action: () => navigation.navigate('ScheduledPump')
         }
     ]
 

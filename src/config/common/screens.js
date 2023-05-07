@@ -5,9 +5,11 @@ import SigIn from "../../View/SigIn";
 import SignUp from "../../View/SignUp";
 import Setting from "../../View/Setting";
 import DetailSetting from "../../View/DetailSetting";
+import ScheduledFan from "../../View/ScheduledFan";
+import ScheduledPump from "../../View/ScheduledPump";
 import LogOut from "../../View/LogOut";
 
-const initalRouteName = 'Home';
+const initalRouteName = 'ScheduledPump';
 
 const screens = {
     'Home': Home,
@@ -17,6 +19,8 @@ const screens = {
     'EnvironmentCondition' : EnvironmentCondition,
     'Setting': Setting,
     'DetailSetting': DetailSetting,
+    'ScheduledFan': ScheduledFan,
+    'ScheduledPump': ScheduledPump,
     'LogOut' : LogOut,
 }
 
