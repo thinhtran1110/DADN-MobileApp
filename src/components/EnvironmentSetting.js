@@ -17,45 +17,47 @@ const EnvironmentSetting = (props) => {
 	{
 		key: 'customize',
 		text: 'Customize',
-  },
-];
+    },
+  ];
   const [from, setFrom] = React.useState(numFrom)
 
   const [to, setTo] = React.useState(numTo)
+
+  const [value, setValue] = React.useState('customize')
   
   return (
     <>
-        <TouchableOpacity style={ styles.settingheader } onPress={() => setShow(!show)}>
+        <TouchableOpacity style={ styles.settingHeader } onPress={() => setShow(!show)}>
             {
                 show ?
                 <>
-                    <Text style={ styles.textheader }>{name}</Text>
+                    <Text style={ styles.textHeader }>{name}</Text>
                     <Icon name={'chevron-up'} style={{ fontSize: 20, padding: 10 }}></Icon>
                 </>
                 :
                 <>
-                    <Text style={ styles.textheader }>{name}</Text>
+                    <Text style={ styles.textHeader }>{name}</Text>
                     <Icon name={'chevron-down'} style={{ fontSize: 20, padding: 10 }}></Icon>
                 </>
             }
         </TouchableOpacity>
-        <View style={ styles.settingele }>
+        <View style={ styles.settingEle }>
             {
                 show ?
                 <>
-                    <Text style={ styles.textele }>Option</Text>
+                    <Text style={ styles.textEle }>Option</Text>
                     <View style={ styles.container }>
-                        <RadioButton PROP={PROP} />
+                        <RadioButton PROP={PROP} val={value} setVal={setValue} />
                     </View>
                     <View style={{flexDirection:'row', marginBottom:10}}>
-                        <Text style={ styles.textele }>From: </Text>
-                        <TextInput style={ styles.inputbutton } value={from} onChangeText={setFrom} keyboardType="numeric"/>
-                        <Text style={ styles.textele }>{unit}</Text>
+                        <Text style={ styles.textEle }>From: </Text>
+                        <TextInput style={ styles.inputButton } value={from} onChangeText={setFrom} keyboardType="numeric"/>
+                        <Text style={ styles.textEle }>{unit}</Text>
                     </View>
                     <View style={{flexDirection:'row'}}>
-                        <Text style={ styles.textele }>To: </Text>
-                        <TextInput style={ styles.inputbutton } value={to} onChangeText={setTo} keyboardType="numeric"/>
-                        <Text style={ styles.textele }>{unit}</Text>
+                        <Text style={ styles.textEle }>To: </Text>
+                        <TextInput style={ styles.inputButton } value={to} onChangeText={setTo} keyboardType="numeric"/>
+                        <Text style={ styles.textEle }>{unit}</Text>
                     </View>
                 </>
                 : null
@@ -68,25 +70,25 @@ const EnvironmentSetting = (props) => {
 export default EnvironmentSetting
 
 const styles = StyleSheet.create({
-    settingheader: {
+    settingHeader: {
         width: 320, 
         borderColor: 'rgba(0, 0, 0, 0.5)', 
         borderBottomWidth: 1, 
         flexDirection: 'row', 
         marginVertical: 10,
     },
-    textheader: {
+    textHeader: {
         width: 290, 
         color: '#000', 
         fontSize: 20, 
         fontWeight: '700', 
         fontFamily: 'Inria Serif'
     },
-    settingele: {
+    settingEle: {
         width: 280,
-        flexDirection: 'column',
+        flexDirection: 'column'
     },
-    textele: {
+    textEle: {
         width: 80, 
         color: '#000', 
         fontSize: 20, 
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    inputbutton: {
+    inputButton: {
 		height: 25,
 		width: 75,
         marginRight: 10,

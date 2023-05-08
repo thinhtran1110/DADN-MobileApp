@@ -1,28 +1,66 @@
-import { StyleSheet, Text, View, Switch } from 'react-native'
+import { StyleSheet, Text, View, Switch, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { ScheduledForm } from './ScheduledForm'
 
 const ScheduledIrrigate = (props) => {
+
+  let popupRef = React.createRef()
   
   const {hour, minute, repeat, num, on } = props
 
   const [isEnabled, setIsEnabled] = React.useState(on)
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  const onShowPopup = () => {
+    popupRef.show()
+  }
+
+  const onClosePopup = () => {
+    popupRef.close()
+  }
+
+  const PROP = [
+    {
+        key: 'Once',
+        text: 'Once',
+    },
+    {
+        key: 'Daily',
+        text: 'Daily',
+    },
+  ];
+
+  const [rep, setRep] = React.useState({repeat})
   
   return (
-    <View style={ styles.irrigateContainer }>
-      <View style={ styles.characterContainer }>
-        <Text style={ isEnabled ? styles.enableIrrigateText : styles.inEnableIrrigateText }>{`${hour}:${minute}`}</Text>
-        <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${repeat}, reach ${num} %`}</Text>
-      </View>
-      <Switch
-        trackColor={{false: '#ffffff', true: '#ffffff'}}
-        thumbColor={isEnabled ? '#000000' : '#8C8C8C'}
-        ios_backgroundColor="#red"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+    <>
+      <TouchableOpacity style={ styles.irrigateContainer }  onPress={onShowPopup}>
+        <View style={ styles.characterContainer }>
+          <Text style={ isEnabled ? styles.enableIrrigateText : styles.inEnableIrrigateText }>{`${hour}:${minute}`}</Text>
+          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${repeat}, reach ${num} %`}</Text>
+        </View>
+        <Switch
+          trackColor={{false: '#ffffff', true: '#ffffff'}}
+          thumbColor={isEnabled ? '#000000' : '#8C8C8C'}
+          ios_backgroundColor="#red"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </TouchableOpacity>
+      <ScheduledForm
+        title={'pump'}
+        ref={(target) => popupRef = target}
+        onTouchOutside={onClosePopup}
+        prop={PROP}
+        hour={hour}
+        minute={minute}
+        temp={num}
+        repeat={rep}
+        setRepeat={setRep}
       />
-    </View>
+    </>
+    
   )
 }
 

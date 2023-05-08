@@ -4,9 +4,16 @@ export default class RadioButton extends Component {
 	state = {
 		value: null,
 	};
+
+	getChoose = (value1) => {
+		this.setState({value: value1})
+	}
+
 	render() {
-		const { PROP } = this.props;
-		const { value } = this.state;
+		const { PROP, val, setVal } = this.props;
+
+		let { value } = this.state;
+
 		return (
 			<View>
 				{PROP.map(res => {
@@ -18,8 +25,9 @@ export default class RadioButton extends Component {
 									this.setState({
 										value: res.key,
 									});
+									setVal(res.key)
 								}}>
-                                  {value === res.key && <View style={styles.selectedRb} />}
+                                  {(value === res.key || val === res.key) && <View style={styles.selectedRb} />}
 							</TouchableOpacity>
 							<Text style={styles.radioText}>{res.text}</Text>
 						</View>

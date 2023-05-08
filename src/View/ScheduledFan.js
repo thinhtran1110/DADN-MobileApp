@@ -20,11 +20,11 @@ const ScheduledFan = () => {
               paddingHorizontal: 50,
               marginVertical: 15
           }}>
-            <TouchableOpacity style={[{ borderWidth: 1 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
+            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
               <Text style={ styles.buttonText }>Customize</Text>
             </TouchableOpacity>
               
-            <TouchableOpacity style={[{ borderWidth: 1 }, (!isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(false)}>
+            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 0.5, borderRightWidth: 1 }, (!isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(false)}>
               <Text style={ styles.buttonText }>Automatic</Text>
             </TouchableOpacity>
           </View>
@@ -60,7 +60,7 @@ const ScheduledFan = () => {
               </View>
 
               <ScheduledTime hour='12' minute='00' repeat='Once' temp='22' on={true}/>
-              <ScheduledTime hour='6' minute='00' repeat='Daily' temp='' on={false}/>
+              <ScheduledTime hour='6' minute='00' repeat='Daily' temp='20' on={false}/>
               <ScheduledTime hour='12' minute='00' repeat='Once' temp='22' on={true}/>
             </>
             : <></>

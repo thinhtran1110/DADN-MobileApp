@@ -1,7 +1,10 @@
-import { StyleSheet, Text, View, Switch } from 'react-native'
+import { StyleSheet, Text, View, Switch, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { ScheduledForm } from './ScheduledForm'
 
 const ScheduledTime = (props) => {
+
+  let popupRef = React.createRef()
   
   const {hour, minute, repeat, temp, on } = props
 
@@ -9,20 +12,54 @@ const ScheduledTime = (props) => {
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   
+  const onShowPopup = () => {
+    popupRef.show()
+  }
+
+  const onClosePopup = () => {
+    popupRef.close()
+  }
+
+  const PROP = [
+    {
+        key: 'Once',
+        text: 'Once',
+    },
+    {
+        key: 'Daily',
+        text: 'Daily',
+    },
+  ];
+
+  const [rep, setRep] = React.useState({repeat})
+
   return (
-    <View style={ styles.timeContainer }>
-      <View style={ styles.characterContainer }>
-        <Text style={ isEnabled ? styles.enableTimeText : styles.inEnableTimeText }>{`${hour}:${minute}`}</Text>
-        <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${repeat}, reach ${temp} °C`}</Text>
-      </View>
-      <Switch
-        trackColor={{false: '#ffffff', true: '#ffffff'}}
-        thumbColor={isEnabled ? '#000000' : '#8C8C8C'}
-        ios_backgroundColor="#red"
-        onValueChange={toggleSwitch}
-        value={isEnabled}
+    <>
+      <TouchableOpacity style={ styles.timeContainer } onPress={onShowPopup}>
+        <View style={ styles.characterContainer }>
+          <Text style={ isEnabled ? styles.enableTimeText : styles.inEnableTimeText }>{`${hour}:${minute}`}</Text>
+          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${repeat}, reach ${temp} °C`}</Text>
+        </View>
+        <Switch
+          trackColor={{false: '#ffffff', true: '#ffffff'}}
+          thumbColor={isEnabled ? '#000000' : '#8C8C8C'}
+          ios_backgroundColor="#red"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      </TouchableOpacity>
+      <ScheduledForm
+        title={'fan'}
+        ref={(target) => popupRef = target}
+        onTouchOutside={onClosePopup}
+        prop={PROP}
+        hour={hour}
+        minute={minute}
+        temp={temp}
+        repeat={rep}
+        setRepeat={setRep}
       />
-    </View>
+    </>
   )
 }
 

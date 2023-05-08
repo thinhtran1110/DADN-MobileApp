@@ -18,7 +18,7 @@ const LogOutViewModel = () => {
             })
 
             await StoreService.removeTokens();
-            navigation.popToTop();
+            navigation.navigate('Home');
         }
         catch(err){
             if(err){

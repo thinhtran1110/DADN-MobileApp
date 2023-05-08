@@ -21,13 +21,14 @@ const DetailSetting = ({nevigation}) => {
   return (
     <>
         <GeneralFrame screenTitle={'Your Setting'} showMenu={true}>
-          <ScrollView showsVerticalScrollIndicator={false} style={{paddingBottom: 10}}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ paddingBottom: 10 }}>
+            <View style={{ alignItems: 'center', marginBottom: 20 }}>
+              <EnvironmentSetting name='Temperature' unit='°C' numFrom='20' numTo='24'></EnvironmentSetting>
 
-            <EnvironmentSetting name='Temperature' unit='°C' numFrom='20' numTo='24'></EnvironmentSetting>
+              <EnvironmentSetting name='Air Humidity' unit='%' numFrom='65' numTo='75'></EnvironmentSetting>
 
-            <EnvironmentSetting name='Air Humidity' unit='%' numFrom='65' numTo='75'></EnvironmentSetting>
-
-            <EnvironmentSetting name='Soil Moisture' unit='%' numFrom='70' numTo='80'></EnvironmentSetting>
+              <EnvironmentSetting name='Soil Moisture' unit='%' numFrom='70' numTo='80'></EnvironmentSetting>
+            </View>
           </ScrollView>
         </GeneralFrame>
     </>

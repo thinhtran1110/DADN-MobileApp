@@ -23,7 +23,7 @@ const ScheduledPump = () => {
               paddingHorizontal: 50,
               marginVertical: 15
           }}>
-            <TouchableOpacity style={[{ borderWidth: 1 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
+            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
               <Text style={ styles.buttonText }>Customize</Text>
             </TouchableOpacity>
               
