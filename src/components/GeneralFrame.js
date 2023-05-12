@@ -7,12 +7,15 @@ import PopupMenu from './PopupMenu'
 import color from '../config/common/color'
 
 const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh, name, groupKey }) => {
+
     const [refreshing, setRefreshing] = useState(false);
+
     const _onRefresh = async () => {
         setRefreshing(true);
         await onRefresh();
         setRefreshing(false);
     }
+    
     return (
         <View style={{backgroundColor: color.mainBackground, flex:1 }}>
                 <SafeAreaView style={{flex: 1, marginHorizontal: 25}}>

@@ -10,14 +10,14 @@ import { LoadingContext } from '../App'
 
 const ScheduledFan = ({route}) => {
 
-  const { name, groupKey } = route.params;
+  const { name, groupKey } = route.params
 
   const [isActive, setIsActive] = React.useState(true)
-
+  
   const {
     speed,
     setSpeed,
-    getSpeed
+    postSpeed
   } = ScheduledFanViewModel(groupKey)
 
   const { isLoading, setIsLoading } = useContext(LoadingContext)
@@ -62,8 +62,9 @@ const ScheduledFan = ({route}) => {
                 maximumTrackTintColor="#000000"
                 value={speed}
                 step={1}
-                onValueChange={(value) => {
-                  getSpeed(parseInt(value));
+                onValueChange={(value) => setSpeed(value)}
+                onSlidingComplete={(value) => {
+                  postSpeed(value);
                 }}
                 trackStyle={{ height: 5, backgroundColor: 'transparent' }}
                 thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}

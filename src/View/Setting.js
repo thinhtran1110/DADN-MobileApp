@@ -12,9 +12,10 @@ const Setting = ({navigation}) => {
 
   const {
     groups,
+    onRefresh,
     refreshScreen,
   } = SettingViewModel();
-
+  
   useFocusEffect(
     useCallback(() => {
         return refreshScreen();
@@ -22,7 +23,7 @@ const Setting = ({navigation}) => {
   );
 
   return (
-    <GeneralFrame screenTitle={'Your Setting'} hideBack={false}>
+    <GeneralFrame screenTitle={'Your Setting'} hideBack={false}  onRefresh={onRefresh}>
         <View style={{backgroundColor: '#DCDCDC', borderWidth: 1, borderRadius: 100, flexDirection: 'row', alignItems: 'center', marginVertical: 10}}>
             <Icon name={'search'} style={{ padding: 10 }}></Icon>
             <TextInput
@@ -32,7 +33,6 @@ const Setting = ({navigation}) => {
               placeholder="Search"
             />
         </View>
-
         <SettingElementsList elementsList = {groups}></SettingElementsList>
     </GeneralFrame>
 )
