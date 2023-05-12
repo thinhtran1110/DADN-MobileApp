@@ -6,7 +6,7 @@ import BackButton from './BackButton'
 import PopupMenu from './PopupMenu'
 import color from '../config/common/color'
 
-const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh }) => {
+const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh, name, groupKey }) => {
     const [refreshing, setRefreshing] = useState(false);
     const _onRefresh = async () => {
         setRefreshing(true);
@@ -46,7 +46,7 @@ const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification 
                                 <Text style={{color: color.primaryLabel, fontFamily: 'Markazi Text', fontWeight: '700', fontSize: 30, textTransform: 'uppercase', width: 335}}>{screenTitle}</Text>
                                 {
                                     showMenu ?    
-                                    <PopupMenu/>
+                                    <PopupMenu name={name} groupKey={groupKey}/>
                                     : null
                                 }
                             </View>

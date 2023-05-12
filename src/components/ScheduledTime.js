@@ -31,14 +31,20 @@ const ScheduledTime = (props) => {
     },
   ];
 
-  const [rep, setRep] = React.useState({repeat})
+  const [h, setH] = React.useState(hour)
+
+  const [m, setM] = React.useState(minute)
+
+  const [t, setT] = React.useState(temp)
+
+  const [rep, setRep] = React.useState(repeat)
 
   return (
     <>
       <TouchableOpacity style={ styles.timeContainer } onPress={onShowPopup}>
         <View style={ styles.characterContainer }>
-          <Text style={ isEnabled ? styles.enableTimeText : styles.inEnableTimeText }>{`${hour}:${minute}`}</Text>
-          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${repeat}, reach ${temp} °C`}</Text>
+          <Text style={ isEnabled ? styles.enableTimeText : styles.inEnableTimeText }>{`${h}:${m}`}</Text>
+          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${rep}, reach ${t} °C`}</Text>
         </View>
         <Switch
           trackColor={{false: '#ffffff', true: '#ffffff'}}
@@ -53,11 +59,14 @@ const ScheduledTime = (props) => {
         ref={(target) => popupRef = target}
         onTouchOutside={onClosePopup}
         prop={PROP}
-        hour={hour}
-        minute={minute}
-        temp={temp}
+        hour={h}
+        setHour={(g) => setH(g)}
+        minute={m}
+        setMinute={(p) => setM(p)}
+        temp={t}
+        setTemp={(n) => setT(n)}
         repeat={rep}
-        setRepeat={setRep}
+        setRepeat={(r) => setRep(r)}
       />
     </>
   )

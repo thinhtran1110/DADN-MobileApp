@@ -3,7 +3,7 @@ import React, {useCallback} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import GeneralFrame from '../components/GeneralFrame'
 import SettingElementsList from '../components/SettingElementsList'
-import GardenViewModel from '../ViewModel/GardenViewModel'
+import SettingViewModel from '../ViewModel/SettingViewModel'
 import { useFocusEffect } from '@react-navigation/native';
 
 const Setting = ({navigation}) => {
@@ -13,7 +13,7 @@ const Setting = ({navigation}) => {
   const {
     groups,
     refreshScreen,
-  } = GardenViewModel();
+  } = SettingViewModel();
 
   useFocusEffect(
     useCallback(() => {

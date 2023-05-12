@@ -1,7 +1,6 @@
-import { View, Text, TouchableOpacity, Image,StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity,StyleSheet } from 'react-native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import color  from '../config/common/color'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 import { useNavigation } from '@react-navigation/native'
 
 const SettingElement = (props) => {
@@ -9,7 +8,10 @@ const SettingElement = (props) => {
     const navigation = useNavigation();
     return (
         <View style={{alignItems: 'center'}}>
-            <TouchableOpacity style={ styles.settingele } onPress={() => navigation.navigate('DetailSetting')}>
+            <TouchableOpacity style={ styles.settingele }
+            onPress={() => {
+                navigation.navigate('DetailSetting', {name: name, groupKey: groupKey});
+            }}>
                 <Text style={ styles.text }>{name}</Text>
                 <Icon name={'chevron-right'} style={{ fontSize: 20, padding: 10}}></Icon>
             </TouchableOpacity>

@@ -9,7 +9,7 @@ import ScheduledFan from "../../View/ScheduledFan";
 import ScheduledPump from "../../View/ScheduledPump";
 import LogOut from "../../View/LogOut";
 
-const initalRouteName = 'Garden';
+const initalRouteName = 'Setting';
 
 const screens = {
     'Home': Home,

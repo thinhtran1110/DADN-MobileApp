@@ -1,16 +1,29 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import GeneralFrame from '../components/GeneralFrame'
+// import Slider from '@react-native-community/slider'
 import { Slider } from 'react-native-elements'
 import ScheduledTime from '../components/ScheduledTime'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import ScheduledFanViewModel from '../ViewModel/ScheduledFanViewModel'
+import { LoadingContext } from '../App'
 
-const ScheduledFan = () => {
+const ScheduledFan = ({route}) => {
+
+  const { name, groupKey } = route.params;
 
   const [isActive, setIsActive] = React.useState(true)
 
+  const {
+    speed,
+    setSpeed,
+    getSpeed
+  } = ScheduledFanViewModel(groupKey)
+
+  const { isLoading, setIsLoading } = useContext(LoadingContext)
+
   return (
-    <GeneralFrame screenTitle={'Your Setting'}>
+    <GeneralFrame screenTitle={`Your Setting\\${name}`}>
       <>
         <View style={ styles.container }>
           <View style={{
@@ -40,22 +53,27 @@ const ScheduledFan = () => {
                 paddingHorizontal: 50,
                 marginVertical: 15
               }}>
-                <Text style={ styles.textHeader }>Fan</Text>
+                <Text style={ styles.textHeader }>{`Fan: ${speed}`}</Text>
                 <Slider
                 style={{width: 250, height: 10}}
                 minimumValue={0}
-                maximumValue={1}
+                maximumValue={100}
                 minimumTrackTintColor="#FFFFFF"
                 maximumTrackTintColor="#000000"
+                value={speed}
+                step={1}
+                onValueChange={(value) => {
+                  getSpeed(parseInt(value));
+                }}
                 trackStyle={{ height: 5, backgroundColor: 'transparent' }}
                 thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}
                 thumbProps={{
-                  children: (
+                children: (
                     <View
-                      style={{width:20, height:20, borderRadius:50, backgroundColor:'#000000'}}
+                    style={{width:20, height:20, borderRadius:50, backgroundColor:'#000000'}}
                     />
                     ),
-                  }}
+                }}
                 />
               </View>
 
