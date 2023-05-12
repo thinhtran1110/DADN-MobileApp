@@ -37,7 +37,7 @@ export class ScheduledForm extends React.Component {
     render() {
         let {show} = this.state
 
-        const {onTouchOutside, title, prop, hour, setHour, minute, setMinute, temp, repeat, setRepeat} = this.props
+        const {onTouchOutside, title, prop, hour, setHour, minute, setMinute, temp, setTemp, repeat, setRepeat} = this.props
 
         return (
             <Modal animationType={'fade'} transparent={true} visible={show} onRequestClose={this.close}>
@@ -49,7 +49,7 @@ export class ScheduledForm extends React.Component {
                         borderTopRightRadius: 10, 
                         borderTopLeftRadius: 10, 
                         paddingHorizontal: 10,
-                        height: deviceHeight*0.8,
+                        height: deviceHeight*0.67,
                         alignItems: 'center'
                     }}>
                         <View style={ styles.container }>
@@ -74,7 +74,7 @@ export class ScheduledForm extends React.Component {
                                 </View>
                                 <View style={{flexDirection:'row', marginBottom:10}}>
                                     <Text style={ styles.textEle }>Reach: </Text>
-                                    <TextInput style={ styles.inputButton } value={temp} onChangeText={setHour} keyboardType="numeric"/>
+                                    <TextInput style={ styles.inputButton } value={temp} onChangeText={setTemp} keyboardType="numeric"/>
                                     {
                                         title==='fan' ?
                                         <Text style={ styles.textUnit }>°C</Text>
@@ -84,7 +84,7 @@ export class ScheduledForm extends React.Component {
                                 {
                                     title==='fan' ?
                                     <View style={{flexDirection:'row', alignItems:'center', marginBottom:10}}>
-                                        <Text style={ styles.textEle }>Speed: </Text>
+                                        <Text style={ styles.textEle }>{`Speed: `}</Text>
                                         <Slider
                                             style={{width: 250, height: 10}}
                                             minimumValue={0}
@@ -100,13 +100,15 @@ export class ScheduledForm extends React.Component {
                                                 />
                                                 ),
                                             }}
+                                            value={0}
+                                            step={0.1}
                                         />
                                     </View>
                                     : <></>
                                 }
                                 <Text style={ styles.textEle }>Repeat</Text>
                                 <View style={ styles.option }>
-                                    <RadioButton PROP={prop} val={repeat} setVal={setRepeat}/>
+                                    <RadioButton PROP={prop} val={repeat} setVal={(v) => setRepeat(v)}/>
                                 </View>
                             </View>
                         </View>

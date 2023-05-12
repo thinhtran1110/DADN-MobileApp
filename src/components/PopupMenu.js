@@ -4,7 +4,9 @@ import { useNavigation } from '@react-navigation/native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { Menu, MenuItem } from 'react-native-material-menu'
 
-const PopupMenu = () => {
+const PopupMenu = (props) => {
+
+    const { name, groupKey } = props
 
     const [visible, setVisible] = React.useState(false)
     const navigation = useNavigation()
@@ -16,11 +18,11 @@ const PopupMenu = () => {
     const options = [
         {
             title: "Adjust Temperature",
-            action: () => navigation.navigate('ScheduledFan')
+            action: () => navigation.navigate('ScheduledFan', {name: name, groupKey: groupKey})
         },
         {
             title: "Irrigate Soil",
-            action: () => navigation.navigate('ScheduledPump')
+            action: () => navigation.navigate('ScheduledPump', {name: name, groupKey: groupKey})
         }
     ]
 

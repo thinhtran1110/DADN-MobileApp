@@ -16,10 +16,10 @@ const ChartTag = (props) => {
         ],
     };
     const chartConfig = {
-        backgroundGradientFrom: "#fb8c00",
-        backgroundGradientTo: "#ffa726",
-        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        backgroundGradientFrom: "#B3DE81",
+        backgroundGradientTo: "#B3DE81",
+        color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
         style: {
             borderRadius: 16
         },

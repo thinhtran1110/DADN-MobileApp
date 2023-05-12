@@ -11,7 +11,7 @@ const LogOutViewModel = () => {
         try{
             const url = `${config.serverAddress}/auth/logout`;
             const [accessToken] = await StoreService.loadTokens();
-            const _ = await axios.post(url,{},{
+            const res = await axios.post(url,{},{
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }

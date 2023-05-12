@@ -15,21 +15,21 @@ const SignInViewModel = () => {
     const login = async (nextScreen) => {
         try{
             const res = await axios.post(
-            `${config.serverAddress}/auth/login`,
-            {
-                username,
-                password
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                `${config.serverAddress}/auth/login`,
+                {
+                    username,
+                    password
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
                 }
-            }
-        )
-        .finally(() => {
-            setUsername('');
-            setPassword('');
-        })
+            )
+            .finally(() => {
+                setUsername('');
+                setPassword('');
+            })
         
             const tokens = res.data;
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);

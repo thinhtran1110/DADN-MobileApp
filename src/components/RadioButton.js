@@ -5,10 +5,6 @@ export default class RadioButton extends Component {
 		value: null,
 	};
 
-	getChoose = (value1) => {
-		this.setState({value: value1})
-	}
-
 	render() {
 		const { PROP, val, setVal } = this.props;
 
