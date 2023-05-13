@@ -18,7 +18,6 @@ const GardenElementsList = (props) => {
                             soilMoisture = feed.last_value;
                         }
                     });
-                    
                     return <GardenElement key={ele.key} temperature={temperature} soilMoisture={soilMoisture} name={ele.name} groupKey={ele.key}></GardenElement>
                 })
                 

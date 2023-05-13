@@ -2,6 +2,7 @@ import ReactNative ,{ View, Text, StyleSheet, TouchableOpacity } from 'react-nat
 import React, { useCallback, useState } from 'react'
 import GeneralFrame from '../components/GeneralFrame';
 import EnvironmentConditionViewModel from '../ViewModel/EnvironmentConditionViewModel';
+import DetailSettingViewModel from '../ViewModel/DetailSettingViewModel';
 import EnvironmentTag from '../components/EnvironmentTag';
 import color from '../config/common/color';
 import ChartTag from '../components/ChartTag';
@@ -16,9 +17,28 @@ const EnvironmentCondition = ({navigation, route}) => {
         temp,
         airHumi,
         soilMtr,
+        elementConditionList,
         refreshScreen,
         onRefresh
     } = EnvironmentConditionViewModel(groupKey);
+
+    const getConditionSetting = (nameCondition, option) => {
+        let op = null
+        if (option == "Customize") {
+            op = true;
+        } else {
+            op = false;
+        }
+        if (nameCondition == "Temperature") {
+          return ['°C', temp.at(-1), op]
+        }
+        if (nameCondition == "Air Humidity") {
+          return ['%', airHumi.at(-1), op]
+        }
+        if (nameCondition == "Soid Moisture") {
+          return ['%', soilMtr.at(-1), op]
+        }
+      }
 
     useFocusEffect(
         useCallback(() => {
@@ -50,13 +70,30 @@ const EnvironmentCondition = ({navigation, route}) => {
                 {
                     isActiveNow  ? 
                     <>
-                        <EnvironmentTag
+                        {
+                            elementConditionList?.map((ele) => {
+                                let [unit, curVal, option] = getConditionSetting(ele.type, ele.option);
+                                return <EnvironmentTag 
+                                        header={ele.type} 
+                                        currentValue={curVal} 
+                                        unit={unit} 
+                                        from={ele.from} 
+                                        to={ele.to} 
+                                        isCustomize={option} 
+                                        groupKey={groupKey}
+                                        name={name}>
+                                    </EnvironmentTag>
+                              })
+                        }
+                        {/* <EnvironmentTag
                             header={'Temperature'}
                             currentValue={temp.at(-1)}
                             unit={'°C'}
                             from={20}
                             to={26}
                             isCustomize={true}
+                            groupKey={groupKey}
+                            name={name}
                         ></EnvironmentTag>
 
                         <EnvironmentTag
@@ -66,6 +103,8 @@ const EnvironmentCondition = ({navigation, route}) => {
                             from={60}
                             to={70}
                             isCustomize={true}
+                            groupKey={groupKey}
+                            name={name}
                         ></EnvironmentTag>
 
                         <EnvironmentTag
@@ -75,7 +114,9 @@ const EnvironmentCondition = ({navigation, route}) => {
                             from={60}
                             to={70}
                             isCustomize={false}
-                        ></EnvironmentTag>
+                            groupKey={groupKey}
+                            name={name}
+                        ></EnvironmentTag> */}
                     </>
                     :
                     <>

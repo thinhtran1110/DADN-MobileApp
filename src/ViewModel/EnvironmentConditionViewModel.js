@@ -9,6 +9,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
     const [temp, setTemp] = useState([]);
     const [airHumi, setAirHumi] = useState([]);
     const [soilMtr, setSoilMtr] = useState([]);
+    const [elementConditionList, setElementConditionList] = useState([]);
     const {
         setIsLoading,
     } = useContext(LoadingContext);
@@ -72,6 +73,28 @@ const EnvironmentConditionViewModel = (groupKey) => {
         }
     }
 
+    const getSetting = async () => {
+        try {
+            const [accessToken] = await StoreService.loadTokens();
+
+            const res = await axios.get(`${config.serverAddress}/setting/conditions/${groupKey}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            setElementConditionList(res.data);
+            return res.data;
+        }
+        catch(err) {
+            if(err.response){
+                console.log(err.response.data);
+                return;
+            }
+            console.log(err);
+        }
+    }
+
     const loadData = async () =>{
         const slice = (data) => {
             let retData = data;
@@ -80,7 +103,8 @@ const EnvironmentConditionViewModel = (groupKey) => {
         const tempPromise = getTemp();
         const airHumiPromise = getAirHumi();
         const soilMtrPromise = getSoidMtr();
-        const [Temp, AirHumi, SoilMtr] =  await Promise.all([tempPromise, airHumiPromise, soilMtrPromise])
+        const [Temp, AirHumi, SoilMtr] =  await Promise.all([tempPromise, airHumiPromise, soilMtrPromise]);
+        getSetting();
         setTemp(slice(Temp));
         setAirHumi(slice(AirHumi));
         setSoilMtr(slice(SoilMtr));
@@ -111,6 +135,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
         temp,
         airHumi,
         soilMtr,
+        elementConditionList,
         refreshScreen,
         onRefresh,
     }
