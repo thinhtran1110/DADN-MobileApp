@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useCallback } from 'react'
-import GeneralFrame from '../components/GeneralFrame'
-import EnvironmentSetting from '../components/EnvironmentSetting'
+import GeneralFrame from '../components/common/GeneralFrame'
+import EnvironmentSetting from '../components/setting/EnvironmentSetting'
 import DetailSettingViewModel from '../ViewModel/DetailSettingViewModel'
 import { useFocusEffect } from '@react-navigation/native'
+import config from '../config/config'
 
 const DetailSetting = ({navigation, route}) => {
 
@@ -31,7 +32,7 @@ const DetailSetting = ({navigation, route}) => {
 
   return (
     <>
-        <GeneralFrame screenTitle={`Your Setting\\${name}`} showMenu={true} name ={name} groupKey={groupKey} onRefresh={onRefresh}>
+        <GeneralFrame screenTitle={`Your Setting \\ ${name}`} showMenu={true} name ={name} groupKey={groupKey} onRefresh={onRefresh}>
           <ScrollView showsVerticalScrollIndicator={false} style={{ paddingBottom: 10 }}>
             <View style={{ alignItems: 'center', marginBottom: 20 }}>
 

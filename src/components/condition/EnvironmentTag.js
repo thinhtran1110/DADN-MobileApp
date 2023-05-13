@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import color from '../config/common/color'
+import color from '../../config/common/color'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
@@ -9,7 +9,7 @@ const EnvironmentTag = (props) => {
     const navigation = useNavigation()
 
     return (
-        <View style={{flex: 1, backgroundColor: (from <= currentValue && currentValue <= to) ? color.inLimit : color.outLimit, borderRadius: 30, marginBottom: 20, flexDirection: 'row', paddingVertical: 10, alignItems: 'center'}}>
+        <View style={{flex: 1, backgroundColor: (from <= currentValue && currentValue <= to) ? color.inLimit : color.outLimit, borderRadius: 30, marginBottom: 20, flexDirection: 'row', alignItems: 'center'}}>
             <View style={{flex: 3}}>
                 <View style={{alignItems: 'center', borderRightWidth: 1}}>
                     <Text style={{color: '#000', fontSize: 17, fontWeight: 700}}>{header}</Text>

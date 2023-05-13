@@ -2,8 +2,8 @@ import { View, Text, Button, TouchableOpacity, TouchableHighlight, TextInput } f
 import React, { useContext } from 'react'
 import color from '../config/common/color'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import TextUserInput from '../components/TextUserInput'
-import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper'
+import TextUserInput from '../components/auth/TextUserInput'
+import KeyboardAvoidingWrapper from '../components/auth/KeyboardAvoidingWrapper'
 import useSignInViewModel from '../ViewModel/SignInViewModel'
 import { LoadingContext } from '../App'
 

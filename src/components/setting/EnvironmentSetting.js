@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import RadioButton from './RadioButton'
+import RadioButton from '../common/RadioButton'
+import config from '../../config/config'
 
 const EnvironmentSetting = (props) => {
 
@@ -51,12 +52,12 @@ const EnvironmentSetting = (props) => {
                 show ?
                 <>
                     <Text style={ styles.textHeader }>{name}</Text>
-                    <Icon name={'chevron-up'} style={{ fontSize: 20, padding: 10 }}></Icon>
+                    <Icon name={'chevron-up'} style={{ fontSize: 20, padding: 10, color:'#000' }}></Icon>
                 </>
                 :
                 <>
                     <Text style={ styles.textHeader }>{name}</Text>
-                    <Icon name={'chevron-down'} style={{ fontSize: 20, padding: 10 }}></Icon>
+                    <Icon name={'chevron-down'} style={{ fontSize: 20, padding: 10, color:'#000' }}></Icon>
                 </>
             }
         </TouchableOpacity>
@@ -95,6 +96,7 @@ const EnvironmentSetting = (props) => {
                                 setFrom(Number(value));
                                 checkStateCondition(numFrom, numTo, option, Number(value), to, op);
                             }}
+                            editable={op=="Customize"? true : false}
                             keyboardType="numeric"
                         />
                         <Text style={ styles.textEle }>{unit}</Text>
@@ -108,6 +110,7 @@ const EnvironmentSetting = (props) => {
                                 setTo(Number(value));
                                 checkStateCondition(numFrom, numTo, option, from, Number(value), op);
                             }}
+                            editable={op=="Customize"? true : false}
                             keyboardType="numeric"
                         />
                         <Text style={ styles.textEle }>{unit}</Text>
@@ -124,21 +127,21 @@ export default EnvironmentSetting
 
 const styles = StyleSheet.create({
     settingHeader: {
-        width: 320, 
+        width: config.deviceWidth*0.8, 
         borderColor: 'rgba(0, 0, 0, 0.5)', 
         borderBottomWidth: 1, 
         flexDirection: 'row', 
         marginVertical: 10,
     },
     textHeader: {
-        width: 290, 
+        width: config.deviceWidth*0.7, 
         color: '#000', 
         fontSize: 20, 
         fontWeight: '700', 
         fontFamily: 'Inria Serif'
     },
     settingEle: {
-        width: 280,
+        width: config.deviceWidth*0.68,
         flexDirection: 'column'
     },
     textEle: {
@@ -160,6 +163,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#000',
         paddingVertical: 0,
+        color: '#000',
         fontSize: 16, 
         fontWeight: '300', 
         fontFamily: 'Inria Serif',

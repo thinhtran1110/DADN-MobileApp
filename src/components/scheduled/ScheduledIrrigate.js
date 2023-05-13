@@ -1,17 +1,18 @@
 import { StyleSheet, Text, View, Switch, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { ScheduledForm } from './ScheduledForm'
+import config from '../../config/config'
 
-const ScheduledTime = (props) => {
+const ScheduledIrrigate = (props) => {
 
   let popupRef = React.createRef()
   
-  const {hour, minute, repeat, temp, on } = props
+  const {hour, minute, repeat, smt, on } = props
 
   const [isEnabled, setIsEnabled] = React.useState(on)
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  
+
   const onShowPopup = () => {
     popupRef.show()
   }
@@ -35,16 +36,16 @@ const ScheduledTime = (props) => {
 
   const [m, setM] = React.useState(minute)
 
-  const [t, setT] = React.useState(temp)
+  const [num, setNum] = React.useState(smt)
 
   const [rep, setRep] = React.useState(repeat)
-
+  
   return (
     <>
-      <TouchableOpacity style={ styles.timeContainer } onPress={onShowPopup}>
+      <TouchableOpacity style={ styles.irrigateContainer }  onPress={onShowPopup}>
         <View style={ styles.characterContainer }>
-          <Text style={ isEnabled ? styles.enableTimeText : styles.inEnableTimeText }>{`${h}:${m}`}</Text>
-          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${rep}, reach ${t} °C`}</Text>
+          <Text style={ isEnabled ? styles.enableIrrigateText : styles.inEnableIrrigateText }>{`${h}:${m}`}</Text>
+          <Text style={ isEnabled ? styles.enableCharText : styles.inEnableCharText }>{`${rep}, reach ${num} %`}</Text>
         </View>
         <Switch
           trackColor={{false: '#ffffff', true: '#ffffff'}}
@@ -55,7 +56,7 @@ const ScheduledTime = (props) => {
         />
       </TouchableOpacity>
       <ScheduledForm
-        title={'fan'}
+        title={'pump'}
         ref={(target) => popupRef = target}
         onTouchOutside={onClosePopup}
         prop={PROP}
@@ -63,21 +64,22 @@ const ScheduledTime = (props) => {
         setHour={(g) => setH(g)}
         minute={m}
         setMinute={(p) => setM(p)}
-        temp={t}
-        setTemp={(n) => setT(n)}
+        num={num}
+        setNum={(n) => setNum(n)}
         repeat={rep}
         setRepeat={(r) => setRep(r)}
       />
     </>
+    
   )
 }
 
-export default ScheduledTime
+export default ScheduledIrrigate
 
 const styles = StyleSheet.create({
-    timeContainer: {
+    irrigateContainer: {
       flexDirection: 'row',
-      width: 320,
+      width: config.deviceWidth*0.8,
       height: 50,
       marginHorizontal: 20,
       marginBottom: 20
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection: 'column'
     },
-    enableTimeText: {
+    enableIrrigateText: {
       marginLeft: 10,
       color: '#000', 
       fontSize: 24, 
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
       fontWeight: '300', 
       fontFamily: 'Inria Serif'
     },
-    inEnableTimeText: {
+    inEnableIrrigateText: {
       marginLeft: 10,
       color: '#8C8C8C', 
       fontSize: 24, 

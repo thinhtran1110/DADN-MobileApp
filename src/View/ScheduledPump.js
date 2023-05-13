@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity, Switch } from 'react-native'
 import React from 'react'
-import GeneralFrame from '../components/GeneralFrame'
-import ScheduledIrrigate from '../components/ScheduledIrrigate'
+import GeneralFrame from '../components/common/GeneralFrame'
+import ScheduledIrrigate from '../components/scheduled/ScheduledIrrigate'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import ScheduledPumpViewModel from '../ViewModel/ScheduledPumpViewModel'
+import config from '../config/config'
 
 const ScheduledPump = ({route}) => {
 
@@ -23,7 +24,7 @@ const ScheduledPump = ({route}) => {
   } = ScheduledPumpViewModel(groupKey)
 
   return (
-    <GeneralFrame screenTitle={`Your Setting\\${name}`}>
+    <GeneralFrame screenTitle={`Your Setting \\ ${name}`}>
       <>
         <View style={ styles.container }>
           <View style={{
@@ -47,7 +48,7 @@ const ScheduledPump = ({route}) => {
             <>
               <View style={{
                 flexDirection: 'row',
-                width: '100%',
+                width: config.deviceWidth*0.8,
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingHorizontal: 50,
@@ -82,9 +83,9 @@ const ScheduledPump = ({route}) => {
                 </View>
               </View>
 
-              <ScheduledIrrigate hour='12' minute='00' repeat='Once' num='70' on={true}/>
-              <ScheduledIrrigate hour='6' minute='00' repeat='Daily' num='50' on={false}/>
-              <ScheduledIrrigate hour='12' minute='00' repeat='Once' num='75' on={true}/>
+              <ScheduledIrrigate hour='12' minute='00' repeat='Once' smt='70' on={true}/>
+              <ScheduledIrrigate hour='6' minute='00' repeat='Daily' smt='50' on={false}/>
+              <ScheduledIrrigate hour='12' minute='00' repeat='Once' smt='75' on={true}/>
             </>
             : <></>
           }
@@ -115,11 +116,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
       color: '#000', 
-      fontSize: 20, 
+      fontSize: 18, 
       padding: 5,
   },
   textHeader: {
-      width: 250, 
+      width: config.deviceWidth*0.5, 
       color: '#000', 
       fontSize: 20, 
       fontWeight: '700', 

@@ -1,11 +1,11 @@
 import ReactNative ,{ View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useCallback, useState } from 'react'
-import GeneralFrame from '../components/GeneralFrame';
+import GeneralFrame from '../components/common/GeneralFrame';
 import EnvironmentConditionViewModel from '../ViewModel/EnvironmentConditionViewModel';
 import DetailSettingViewModel from '../ViewModel/DetailSettingViewModel';
-import EnvironmentTag from '../components/EnvironmentTag';
+import EnvironmentTag from '../components/condition/EnvironmentTag';
 import color from '../config/common/color';
-import ChartTag from '../components/ChartTag';
+import ChartTag from '../components/condition/ChartTag';
 import { useFocusEffect } from '@react-navigation/native';
 
 
@@ -47,7 +47,7 @@ const EnvironmentCondition = ({navigation, route}) => {
     );
 
     return (
-        <GeneralFrame screenTitle={`${name}`} onRefresh={onRefresh}>
+        <GeneralFrame screenTitle={`Your Garden \\ ${name}`} onRefresh={onRefresh}>
             <View style={{flex: 1}}>
             <View style={{
                 flexDirection: 'row',
@@ -85,38 +85,6 @@ const EnvironmentCondition = ({navigation, route}) => {
                                     </EnvironmentTag>
                               })
                         }
-                        {/* <EnvironmentTag
-                            header={'Temperature'}
-                            currentValue={temp.at(-1)}
-                            unit={'°C'}
-                            from={20}
-                            to={26}
-                            isCustomize={true}
-                            groupKey={groupKey}
-                            name={name}
-                        ></EnvironmentTag>
-
-                        <EnvironmentTag
-                            header={'Air Humidity'}
-                            currentValue={airHumi.at(-1)}
-                            unit={'%'}
-                            from={60}
-                            to={70}
-                            isCustomize={true}
-                            groupKey={groupKey}
-                            name={name}
-                        ></EnvironmentTag>
-
-                        <EnvironmentTag
-                            header={'Soid Moisture'}
-                            currentValue={soilMtr.at(-1)}
-                            unit={'%'}
-                            from={60}
-                            to={70}
-                            isCustomize={false}
-                            groupKey={groupKey}
-                            name={name}
-                        ></EnvironmentTag> */}
                     </>
                     :
                     <>
