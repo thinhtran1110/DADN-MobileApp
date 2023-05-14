@@ -14,6 +14,7 @@ const ScheduledFan = ({route}) => {
 
   const [isActive, setIsActive] = React.useState(true)
 
+  console.log(groupKey);
   const {
     speed,
     setSpeed,

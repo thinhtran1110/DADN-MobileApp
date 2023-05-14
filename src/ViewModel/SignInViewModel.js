@@ -4,6 +4,7 @@ import axios from 'axios';
 import config from '../config/config';
 import StoreService from '../services/storeService';
 import { useNavigation } from '@react-navigation/native';
+import { AuthModel } from '../Model/authModel';
 
 
 const SignInViewModel = () => {
@@ -12,20 +13,12 @@ const SignInViewModel = () => {
     const [isPasswordHiding, setIsPasswordHiding] = useState(true);
     const navigation = useNavigation();
     const [errorMessage, setErrorMessage] = useState('');
+    const authModel = AuthModel();
+
+
     const login = async (nextScreen) => {
         try{
-            const res = await axios.post(
-                `${config.serverAddress}/auth/login`,
-                {
-                    username,
-                    password
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                }
-            )
+            const res = await authModel.SigIn(username, password)
             .finally(() => {
                 setUsername('');
                 setPassword('');

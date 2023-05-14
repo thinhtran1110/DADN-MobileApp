@@ -22,7 +22,7 @@ const ScheduledFanViewModel = (groupKey) => {
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-            
+            console.log(res.data);
         }
         catch(err) {
             if(err.response){
