@@ -8,6 +8,8 @@ import DetailSetting from "../../View/DetailSetting";
 import ScheduledFan from "../../View/ScheduledFan";
 import ScheduledPump from "../../View/ScheduledPump";
 import LogOut from "../../View/LogOut";
+import Notification from "../../View/Notification";
+import History from "../../View/History";
 
 const initalRouteName = 'Home';
 
@@ -22,6 +24,8 @@ const screens = {
     'ScheduledFan': ScheduledFan,
     'ScheduledPump': ScheduledPump,
     'LogOut' : LogOut,
+    'Notification': Notification,
+    'History': History
 }
 
 const createScreensStack = (Stack) => {

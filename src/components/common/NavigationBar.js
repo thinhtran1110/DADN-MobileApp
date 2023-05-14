@@ -18,7 +18,7 @@ const NavigationBar = (props) => {
                 <Icon name={'cog'} style={style.icon}></Icon>
                 
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('History')}>
                 <Icon name={'list-ul'} style={style.icon}></Icon>
 
             </TouchableOpacity>
@@ -32,6 +32,7 @@ const NavigationBar = (props) => {
 
 const style = StyleSheet.create({
     icon: {
+        color: '#000',
         fontSize: 30,
         paddingVertical: 10,
         paddingHorizontal: 30
