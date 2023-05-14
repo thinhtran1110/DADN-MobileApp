@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import GeneralFrame from '../components/GeneralFrame'
+import GeneralFrame from '../components/common/GeneralFrame'
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 import LogOutViewModel from '../ViewModel/LogOutViewModel';

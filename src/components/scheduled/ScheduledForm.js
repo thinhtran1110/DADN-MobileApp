@@ -1,7 +1,7 @@
 import { Modal, Dimensions, TouchableWithoutFeedback, StyleSheet, View, Text, TouchableOpacity, TextInput } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import React from 'react'
-import RadioButton from './RadioButton'
+import RadioButton from '../common/RadioButton'
 import { Slider } from 'react-native-elements'
 
 const deviceHeight = Dimensions.get('window').height
@@ -37,7 +37,7 @@ export class ScheduledForm extends React.Component {
     render() {
         let {show} = this.state
 
-        const {onTouchOutside, title, prop, hour, setHour, minute, setMinute, temp, setTemp, repeat, setRepeat} = this.props
+        const {onTouchOutside, title, prop, hour, setHour, minute, setMinute, num, setNum, repeat, setRepeat} = this.props
 
         return (
             <Modal animationType={'fade'} transparent={true} visible={show} onRequestClose={this.close}>
@@ -67,14 +67,14 @@ export class ScheduledForm extends React.Component {
                             <View style={ styles.settingEle }>
                                 <View style={{flexDirection:'row', marginBottom:10}}>
                                     <Text style={ styles.textEle }>Time: </Text>
-                                    <TextInput style={ styles.inputButton } value={hour} onChangeText={setHour} keyboardType="numeric"/>
+                                    <TextInput style={ styles.inputButton } value={hour} onChangeText={(value) => setHour(value)} keyboardType="numeric"/>
                                     <Text style={ styles.textTime }>h :</Text>
-                                    <TextInput style={ styles.inputButton } value={minute} onChangeText={setMinute} keyboardType="numeric"/>
+                                    <TextInput style={ styles.inputButton } value={minute} onChangeText={(value) => setMinute(value)} keyboardType="numeric"/>
                                     <Text style={ styles.textTime }>m</Text>
                                 </View>
                                 <View style={{flexDirection:'row', marginBottom:10}}>
                                     <Text style={ styles.textEle }>Reach: </Text>
-                                    <TextInput style={ styles.inputButton } value={temp} onChangeText={setTemp} keyboardType="numeric"/>
+                                    <TextInput style={ styles.inputButton } value={num} onChangeText={(value) => setNum(value)} keyboardType="numeric"/>
                                     {
                                         title==='fan' ?
                                         <Text style={ styles.textUnit }>°C</Text>
@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#000',
         paddingVertical:0,
+        color: '#000',
         fontSize: 16, 
         fontWeight: '300', 
         fontFamily: 'Inria Serif',

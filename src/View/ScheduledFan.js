@@ -1,30 +1,30 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
-import GeneralFrame from '../components/GeneralFrame'
+import GeneralFrame from '../components/common/GeneralFrame'
 // import Slider from '@react-native-community/slider'
 import { Slider } from 'react-native-elements'
-import ScheduledTime from '../components/ScheduledTime'
+import ScheduledTime from '../components/scheduled/ScheduledTime'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import ScheduledFanViewModel from '../ViewModel/ScheduledFanViewModel'
 import { LoadingContext } from '../App'
+import config from '../config/config'
 
 const ScheduledFan = ({route}) => {
 
-  const { name, groupKey } = route.params;
+  const { name, groupKey } = route.params
 
   const [isActive, setIsActive] = React.useState(true)
-
-  console.log(groupKey);
+  
   const {
     speed,
     setSpeed,
-    getSpeed
+    postSpeed
   } = ScheduledFanViewModel(groupKey)
 
   const { isLoading, setIsLoading } = useContext(LoadingContext)
 
   return (
-    <GeneralFrame screenTitle={`Your Setting\\${name}`}>
+    <GeneralFrame screenTitle={`Your Setting \\ ${name}`}>
       <>
         <View style={ styles.container }>
           <View style={{
@@ -48,7 +48,7 @@ const ScheduledFan = ({route}) => {
             <>
               <View style={{
                 flexDirection: 'row',
-                width: '100%',
+                width: config.deviceWidth*0.8,
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingHorizontal: 50,
@@ -56,15 +56,16 @@ const ScheduledFan = ({route}) => {
               }}>
                 <Text style={ styles.textHeader }>{`Fan: ${speed}`}</Text>
                 <Slider
-                style={{width: 250, height: 10}}
+                style={{width:config.deviceWidth*0.5, height: 10}}
                 minimumValue={0}
                 maximumValue={100}
                 minimumTrackTintColor="#FFFFFF"
                 maximumTrackTintColor="#000000"
                 value={speed}
                 step={1}
-                onValueChange={(value) => {
-                  getSpeed(parseInt(value));
+                onValueChange={(value) => setSpeed(value)}
+                onSlidingComplete={(value) => {
+                  postSpeed(value);
                 }}
                 trackStyle={{ height: 5, backgroundColor: 'transparent' }}
                 thumbStyle={{ height: 20, width: 20, backgroundColor: 'transparent' }}
@@ -106,20 +107,20 @@ const styles = StyleSheet.create({
 
   },
   inActiveButton: {
-      flex: 1, 
-      alignItems: 'center', 
-      backgroundColor: '#fff', 
+    flex: 1, 
+    alignItems: 'center', 
+    backgroundColor: '#fff', 
   },
   buttonText: {
-      color: '#000', 
-      fontSize: 20, 
-      padding: 5,
+    color: '#000', 
+    fontSize: 18, 
+    padding: 5,
   },
   textHeader: {
-      width: 100, 
-      color: '#000', 
-      fontSize: 20, 
-      fontWeight: '700', 
-      fontFamily: 'Inria Serif'
+    width: config.deviceWidth*0.3, 
+    color: '#000', 
+    fontSize: 20, 
+    fontWeight: '700', 
+    fontFamily: 'Inria Serif'
   }
 })

@@ -4,15 +4,19 @@ import NavigationBar from './NavigationBar'
 import NotificationButton from './NotificationButton'
 import BackButton from './BackButton'
 import PopupMenu from './PopupMenu'
-import color from '../config/common/color'
+import color from '../../config/common/color'
+import config from '../../config/config'
 
 const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification = true, showMenu = false, onRefresh, name, groupKey }) => {
+
     const [refreshing, setRefreshing] = useState(false);
+
     const _onRefresh = async () => {
         setRefreshing(true);
         await onRefresh();
         setRefreshing(false);
     }
+    
     return (
         <View style={{backgroundColor: color.mainBackground, flex:1 }}>
                 <SafeAreaView style={{flex: 1, marginHorizontal: 25}}>
@@ -43,7 +47,7 @@ const GeneralFrame = ({children, screenTitle, hideBack = true, hideNotification 
                             }
                             
                             <View style={{ flexDirection:'row',marginTop: '15%' }}>
-                                <Text style={{color: color.primaryLabel, fontFamily: 'Markazi Text', fontWeight: '700', fontSize: 30, textTransform: 'uppercase', width: 335}}>{screenTitle}</Text>
+                                <Text style={{color: color.primaryLabel, fontFamily: 'Markazi Text', fontWeight: '700', fontSize: 27, width: config.deviceWidth*0.8}}>{screenTitle}</Text>
                                 {
                                     showMenu ?    
                                     <PopupMenu name={name} groupKey={groupKey}/>

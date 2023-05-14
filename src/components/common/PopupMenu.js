@@ -31,9 +31,7 @@ const PopupMenu = (props) => {
                 visible={visible}
                 anchor={
                     <TouchableOpacity onPress={showMenu}>   
-                        <View 
-                            style={{alignItems:'center', justifyContent:'center'}} 
-                        >
+                        <View style={{alignItems:'center', justifyContent:'center'}}>
                             <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000' }}></Icon>
                         </View>
                     </TouchableOpacity>
@@ -42,21 +40,20 @@ const PopupMenu = (props) => {
                 style={styles.popup}
             >
                 {
-                            options.map((op, i) => {
-                                return (
-                                    <MenuItem 
-                                        style={ styles.option } key={i} 
-                                        onPress={() => {
-                                            op.action(); 
-                                            hideMenu();
-                                        }}
-                                    >
-                                        <Text style={{color: '#000'}}>{op.title}</Text>
-                                    </MenuItem>
-                                )
-                                
-                            })
-                        }
+                    options.map((op, i) => {
+                        return (
+                            <MenuItem 
+                                style={ styles.option } key={i} 
+                                onPress={() => {
+                                    op.action(); 
+                                    hideMenu();
+                                }}
+                            >
+                                <Text style={{color: '#000'}}>{op.title}</Text>
+                            </MenuItem>
+                        )
+                    })
+                }
             </Menu>
   )
 }

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import color from '../config/common/color';
+import color from '../../config/common/color';
 import { useNavigation } from '@react-navigation/native';
 
 const NavigationBar = (props) => {

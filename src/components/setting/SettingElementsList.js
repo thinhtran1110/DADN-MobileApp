@@ -8,7 +8,7 @@ const SettingElementsList = (props) => {
         <ScrollView style={{flexDirection: 'column'}} showsVerticalScrollIndicator={false}>
             {   
                 elementsList?.map((ele) => {
-                    return <SettingElement key={ele.key} name={ele.name} groupKey={ele.groupKey}></SettingElement>
+                    return <SettingElement key={ele.key} name={ele.name} groupKey={ele.key}></SettingElement>
                 })
                 
             }
