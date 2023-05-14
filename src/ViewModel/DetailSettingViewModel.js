@@ -1,27 +1,22 @@
-import React, { useState, useContext } from 'react'
-import StoreService from '../services/storeService'
-import axios from 'axios'
-import config from '../config/config'
+import React, { useState, useContext } from 'react';
+import StoreService from '../services/storeService';
 import { LoadingContext } from '../App';
+import { SettingModel } from '../Model/SettingModel';
 
-const DetailSettingViewModel = (key) => {
+const DetailSettingViewModel = (groupKey) => {
 
-    const [elementConditionList, setElementConditionList] = useState([])
-
+    const [elementConditionList, setElementConditionList] = useState([]);
     const {
         setIsLoading,
     } = useContext(LoadingContext);
+    const settingModel = SettingModel();
 
     const getSetting = async () => {
         try {
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/setting/conditions/${key}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await settingModel.getSetting(groupKey, accessToken);
+
             setElementConditionList(res.data);
             return res.data;
         }
@@ -38,18 +33,7 @@ const DetailSettingViewModel = (key) => {
         try {
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.patch(`${config.serverAddress}/setting/conditions/${key}`,
-            {
-                type: typ,
-                option: op,
-                from: valueFrom,
-                to: valueTo
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await settingModel.patchSetting(groupKey, accessToken, typ, op, valueFrom, valueTo)
         }
         catch(err) {
             if(err.response){

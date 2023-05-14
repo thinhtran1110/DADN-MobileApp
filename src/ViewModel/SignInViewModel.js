@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from '../config/config';
 import StoreService from '../services/storeService';
 import { useNavigation } from '@react-navigation/native';
-import { AuthModel } from '../Model/authModel';
+import { AuthModel } from '../Model/AuthModel';
 
 
 const SignInViewModel = () => {
@@ -18,7 +18,8 @@ const SignInViewModel = () => {
 
     const login = async (nextScreen) => {
         try{
-            const res = await authModel.SigIn(username, password)
+            const res = await authModel.SignIn(username, password)
+            
             .finally(() => {
                 setUsername('');
                 setPassword('');

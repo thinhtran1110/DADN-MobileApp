@@ -1,9 +1,9 @@
-import { View, Text } from 'react-native'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import StoreService from '../services/storeService';
-import axios from 'axios';
 import { LoadingContext } from '../App';
-import config from '../config/config';
+import { AdafruitModel } from '../Model/AdafruitModel';
+import { SettingModel } from '../Model/SettingModel';
+
 const EnvironmentConditionViewModel = (groupKey) => {
     const [isActiveNow, setIsActiveNow] = useState(true);
     const [temp, setTemp] = useState([]);
@@ -13,15 +13,15 @@ const EnvironmentConditionViewModel = (groupKey) => {
     const {
         setIsLoading,
     } = useContext(LoadingContext);
+    const adafruitModel = AdafruitModel();
+    const settingModel = SettingModel();
+
     const getTemp = async () => {
         try{
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/adafruit/data/${groupKey}.temp-sensor`,{
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await adafruitModel.getTemp(groupKey, accessToken);
+
             return res.data;
         }
         catch(err){
@@ -37,11 +37,8 @@ const EnvironmentConditionViewModel = (groupKey) => {
         try{
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/adafruit/data/${groupKey}.humi-sensor`,{
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await adafruitModel.getAirHumi(groupKey, accessToken);
+
             return res.data;
         }
         catch(err){
@@ -57,11 +54,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
         try{
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/adafruit/data/${groupKey}.soil-sensor`,{
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await adafruitModel.getSoidMtr(groupKey, accessToken);
             return res.data;
         }
         catch(err){
@@ -77,12 +70,7 @@ const EnvironmentConditionViewModel = (groupKey) => {
         try {
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/setting/conditions/${groupKey}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await settingModel.getSetting(groupKey, accessToken)
             setElementConditionList(res.data);
             return res.data;
         }

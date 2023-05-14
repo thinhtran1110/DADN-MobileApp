@@ -2,7 +2,24 @@ import axios from 'axios';
 import config from '../config/config';
 
 export const AuthModel = () => {
-    const SigIn = (username, password) => {
+
+    const SignUp = (username, password, apiKey) => {
+        return axios.post(
+            `${config.serverAddress}/auth/signup`,
+            {
+                username,
+                password,
+                adafruitToken: apiKey
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+        )
+    }
+
+    const SignIn = (username, password) => {
         return axios.post(
             `${config.serverAddress}/auth/login`,
             {
@@ -17,13 +34,21 @@ export const AuthModel = () => {
         )
     }
 
-
-
-
-
-
+    const LogOut = (token) => {
+        return axios.post(
+            `${config.serverAddress}/auth/logout`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        )
+    }
 
     return {
-        SigIn,
+        SignUp,
+        SignIn,
+        LogOut
     }
 }

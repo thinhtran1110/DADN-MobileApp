@@ -1,23 +1,20 @@
-import { View, Text } from 'react-native'
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import config from '../config/config'
 import StoreService from '../services/storeService'
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry'
 import { LoadingContext } from '../App'
+import { AdafruitModel } from '../Model/AdafruitModel'
 
 const GardenViewModel = () => {
     const [groups, setGroups] = useState(null);
     const {setIsLoading} = useContext(LoadingContext);
+    const adafruitModel = AdafruitModel();
+
     const getGroups = async () => {
         try{
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.get(`${config.serverAddress}/adafruit/groups`,{
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
+            const res = await adafruitModel.getGroups(accessToken)
             return res.data;
         }
         catch(err){

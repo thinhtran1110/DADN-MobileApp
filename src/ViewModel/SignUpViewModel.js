@@ -4,6 +4,7 @@ import axios from 'axios';
 import StoreService from '../services/storeService';
 import config from '../config/config';
 import { useNavigation } from '@react-navigation/native';
+import { AuthModel } from '../Model/AuthModel';
 
 
 const SignUpViewModel = () => {
@@ -14,6 +15,7 @@ const SignUpViewModel = () => {
     const [isConfirmPasswordHiding, setIsConfirmPasswordHiding] = useState(true);
     const [apiKey, setApiKey] = useState('');
     const navigation = useNavigation();
+    const authModel = AuthModel();
 
     const register = async (nextScreen) => {
         try {
@@ -27,19 +29,8 @@ const SignUpViewModel = () => {
                 return;
             }
 
-            const res = await axios.post(
-                `${config.serverAddress}/auth/signup`,
-                {
-                    username,
-                    password,
-                    adafruitToken: apiKey
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                }
-            )
+            const res = await authModel.SignUp(username, password, apiKey)
+
             .finally(() => {
                 setUsername('');
                 setPassword('');

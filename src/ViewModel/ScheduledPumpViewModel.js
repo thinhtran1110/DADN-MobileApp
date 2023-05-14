@@ -1,22 +1,15 @@
-import {View, Text} from 'react-native'
-import React from 'react'
 import StoreService from '../services/storeService'
-import axios from 'axios'
-import config from '../config/config'
+import { AdafruitModel } from '../Model/AdafruitModel'
 
 const ScheduledPumpViewModel = (groupKey) => {
+
+    const adafruitModel = AdafruitModel();
 
     const onPump = async () => {
         try {
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.post(`${config.serverAddress}/adafruit/${groupKey}/pump_on`,
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
+            const res = await adafruitModel.postOnPump(groupKey, accessToken);
         }
         catch(err) {
             if(err.response){
@@ -31,13 +24,7 @@ const ScheduledPumpViewModel = (groupKey) => {
         try {
             const [accessToken] = await StoreService.loadTokens();
 
-            const res = await axios.post(`${config.serverAddress}/adafruit/${groupKey}/pump_off`,
-            {},
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
+            const res = await adafruitModel.postOffPump(groupKey, accessToken);
         }
         catch(err) {
             if(err.response){

@@ -1,11 +1,11 @@
 import React from 'react'
 import StoreService from '../services/storeService';
-import axios from 'axios';
-import config from '../config/config';
+import { AdafruitModel } from '../Model/AdafruitModel';
 
 const ScheduledFanViewModel = (groupKey) => {
 
-    const [speed, setSpeed] = React.useState(0)
+    const [speed, setSpeed] = React.useState(0);
+    const adafruitModel = AdafruitModel();
 
     const postSpeed = async (val) => {
         try {
@@ -13,15 +13,7 @@ const ScheduledFanViewModel = (groupKey) => {
 
             setSpeed(val)
             
-            const res = await axios.post(`${config.serverAddress}/adafruit/${groupKey}/fan_speed`,
-            {
-                value: val
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
+            const res = await adafruitModel.postSpeed(groupKey, accessToken, val)
         }
         catch(err) {
             if(err.response){

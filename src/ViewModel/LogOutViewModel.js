@@ -4,18 +4,16 @@ import axios from 'axios'
 import config from '../config/config'
 import StoreService from '../services/storeService'
 import { useNavigation } from '@react-navigation/native'
+import { AuthModel } from '../Model/AuthModel'
 
 const LogOutViewModel = () => {
     const navigation = useNavigation();
+    const authModel = AuthModel();
+    
     const logout = async () => {
         try{
-            const url = `${config.serverAddress}/auth/logout`;
             const [accessToken] = await StoreService.loadTokens();
-            const res = await axios.post(url,{},{
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
+            const res = await authModel.LogOut(accessToken)
 
             await StoreService.removeTokens();
             navigation.navigate('Home');
