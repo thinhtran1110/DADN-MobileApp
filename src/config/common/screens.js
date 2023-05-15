@@ -11,7 +11,7 @@ import LogOut from "../../View/LogOut";
 import Notification from "../../View/Notification";
 import History from "../../View/History";
 
-const initalRouteName = 'Home';
+const initalRouteName = 'Setting';
 
 const screens = {
     'Home': Home,

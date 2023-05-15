@@ -26,6 +26,7 @@ const SignInViewModel = () => {
             })
         
             const tokens = res.data;
+            console.log(tokens.accessToken);
             await StoreService.storeTokens(tokens.accessToken, tokens.refreshToken);
             setErrorMessage('');
             navigation.navigate(nextScreen);

@@ -1,50 +1,65 @@
-import { StyleSheet, Text, View, TouchableOpacity, Switch } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import React, { useCallback } from 'react'
 import GeneralFrame from '../components/common/GeneralFrame'
 import ScheduledIrrigate from '../components/scheduled/ScheduledIrrigate'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import ScheduledPumpViewModel from '../ViewModel/ScheduledPumpViewModel'
 import config from '../config/config'
+import { useFocusEffect } from '@react-navigation/native'
 
 const ScheduledPump = ({route}) => {
 
   const { name, groupKey } = route.params
 
-  const [isActive, setIsActive] = React.useState(true)
-
-  const [isEnabled, setIsEnabled] = React.useState(true)
+  const {
+    onPump,
+    offPump,
+    scheduledTimeFrame,
+    mode,
+    updateMode,
+    refreshScreen,
+    onRefresh
+  } = ScheduledPumpViewModel("Pump", groupKey)
 
   const [on, setOn] = React.useState(false)
 
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState)
-
-  const {
-    onPump,
-    offPump
-  } = ScheduledPumpViewModel(groupKey)
+  useFocusEffect(
+    useCallback(() => {
+      return refreshScreen();
+    },[])
+  );
 
   return (
-    <GeneralFrame screenTitle={`Your Setting \\ ${name}`}>
+    <GeneralFrame screenTitle={`Your Setting \\ ${name}`} onPress={onRefresh}>
       <>
         <View style={ styles.container }>
           <View style={{
-              flexDirection: 'row',
-              width: '100%',
-              justifyContent: 'center',
-              paddingHorizontal: 50,
-              marginVertical: 15
+            flexDirection: 'row',
+            width: '100%',
+            justifyContent: 'center',
+            paddingHorizontal: 50,
+            marginVertical: 15
           }}>
-            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
+            <TouchableOpacity
+              style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 },
+                (mode ? styles.activeButton : styles.inActiveButton)]}
+              onPress={() => {
+                updateMode("Customize");
+              }}>
               <Text style={ styles.buttonText }>Customize</Text>
             </TouchableOpacity>
               
-            <TouchableOpacity style={[{ borderWidth: 1 }, (!isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(false)}>
+            <TouchableOpacity
+              style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 0.5, borderRightWidth: 1 },
+                (!mode ? styles.activeButton : styles.inActiveButton)]}
+              onPress={() => {
+                updateMode("Automatic");
+              }}>
               <Text style={ styles.buttonText }>Automatic</Text>
             </TouchableOpacity>
           </View>
 
           {
-            isActive ?
+            mode ?
             <>
               <View style={{
                 flexDirection: 'row',
@@ -83,9 +98,11 @@ const ScheduledPump = ({route}) => {
                 </View>
               </View>
 
-              <ScheduledIrrigate hour='12' minute='00' repeat='Once' smt='70' on={true}/>
-              <ScheduledIrrigate hour='6' minute='00' repeat='Daily' smt='50' on={false}/>
-              <ScheduledIrrigate hour='12' minute='00' repeat='Once' smt='75' on={true}/>
+              {
+                scheduledTimeFrame?.map((ele) => {
+                  return <ScheduledIrrigate hour={ele.hour} minute={ele.minute} repeat={ele.repeat} smt={ele.limit} on={true} />
+                })
+              }
             </>
             : <></>
           }
@@ -110,25 +127,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   inActiveButton: {
-      alignItems: 'center', 
-      backgroundColor: '#fff',
-      justifyContent: 'center'
+    alignItems: 'center', 
+    backgroundColor: '#fff',
+    justifyContent: 'center'
   },
   buttonText: {
-      color: '#000', 
-      fontSize: 18, 
-      padding: 5,
+    color: '#000', 
+    fontSize: 18, 
+    padding: 5,
   },
   textHeader: {
-      width: config.deviceWidth*0.5, 
-      color: '#000', 
-      fontSize: 20, 
-      fontWeight: '700', 
-      fontFamily: 'Inria Serif'
+    width: config.deviceWidth*0.5, 
+    color: '#000', 
+    fontSize: 20, 
+    fontWeight: '700', 
+    fontFamily: 'Inria Serif'
   },
   pumpText: {
-      color: '#000', 
-      fontSize: 16, 
-      padding: 5
+    color: '#000', 
+    fontSize: 16, 
+    padding: 5
   }
 })

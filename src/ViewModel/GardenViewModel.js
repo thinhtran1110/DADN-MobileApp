@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react'
-import axios from 'axios'
-import config from '../config/config'
+import React from 'react'
 import StoreService from '../services/storeService'
 import { LoadingContext } from '../App'
 import { AdafruitModel } from '../Model/AdafruitModel'
 
 const GardenViewModel = () => {
-    const [groups, setGroups] = useState(null);
-    const {setIsLoading} = useContext(LoadingContext);
+    const [groups, setGroups] = React.useState(null);
+    const {setIsLoading} = React.useContext(LoadingContext);
     const adafruitModel = AdafruitModel();
 
     const getGroups = async () => {

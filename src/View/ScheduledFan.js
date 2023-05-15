@@ -1,30 +1,36 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useCallback } from 'react'
 import GeneralFrame from '../components/common/GeneralFrame'
-// import Slider from '@react-native-community/slider'
 import { Slider } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/AntDesign'
 import ScheduledTime from '../components/scheduled/ScheduledTime'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import ScheduledFanViewModel from '../ViewModel/ScheduledFanViewModel'
-import { LoadingContext } from '../App'
 import config from '../config/config'
+import { useFocusEffect } from '@react-navigation/native'
 
 const ScheduledFan = ({route}) => {
 
   const { name, groupKey } = route.params
-
-  const [isActive, setIsActive] = React.useState(true)
   
   const {
     speed,
     setSpeed,
-    postSpeed
-  } = ScheduledFanViewModel(groupKey)
+    postSpeed,
+    mode,
+    scheduledTimeFrame,
+    updateMode,
+    refreshScreen,
+    onRefresh
+  } = ScheduledFanViewModel("Fan", groupKey)
 
-  const { isLoading, setIsLoading } = useContext(LoadingContext)
+  useFocusEffect(
+    useCallback(() => {
+      return refreshScreen();
+    },[])
+  );
 
   return (
-    <GeneralFrame screenTitle={`Your Setting \\ ${name}`}>
+    <GeneralFrame screenTitle={`Your Setting \\ ${name}`} onPress={onRefresh}>
       <>
         <View style={ styles.container }>
           <View style={{
@@ -34,17 +40,27 @@ const ScheduledFan = ({route}) => {
               paddingHorizontal: 50,
               marginVertical: 15
           }}>
-            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 } ,(isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(true)}>
+            <TouchableOpacity
+              style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 1, borderRightWidth: 0.5 },
+                (mode ? styles.activeButton : styles.inActiveButton)]} 
+              onPress={() => {
+                updateMode("Customize");
+              }}>
               <Text style={ styles.buttonText }>Customize</Text>
             </TouchableOpacity>
               
-            <TouchableOpacity style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 0.5, borderRightWidth: 1 }, (!isActive ? styles.activeButton : styles.inActiveButton)]} onPress={() => setIsActive(false)}>
+            <TouchableOpacity
+              style={[{ borderTopWidth: 1, borderBottomWidth: 1, borderLeftWidth: 0.5, borderRightWidth: 1 },
+                (!mode ? styles.activeButton : styles.inActiveButton)]}
+              onPress={() => {
+                updateMode("Automatic");
+              }}>
               <Text style={ styles.buttonText }>Automatic</Text>
             </TouchableOpacity>
           </View>
 
           {
-            isActive ?
+            mode ?
             <>
               <View style={{
                 flexDirection: 'row',
@@ -78,14 +94,23 @@ const ScheduledFan = ({route}) => {
                 }}
                 />
               </View>
-
-              <ScheduledTime hour='12' minute='00' repeat='Once' temp='22' on={true}/>
-              <ScheduledTime hour='6' minute='00' repeat='Daily' temp='20' on={false}/>
-              <ScheduledTime hour='12' minute='00' repeat='Once' temp='22' on={true}/>
+              {
+                scheduledTimeFrame?.map((ele) => {
+                  return <ScheduledTime id={ele.id} hour={ele.hour} minute={ele.minute} repeat={ele.repeat} temp={ele.limit} on={true} />
+                })
+              }
             </>
             : <></>
           }
         </View>
+        <View>
+          <TouchableOpacity style={{backgroundColor:"red"}}>
+            <Icon icon="pluscircleo" color="#000" size={50} />
+            
+          </TouchableOpacity>
+        </View>
+        
+        
       </>
     </GeneralFrame>
   )

@@ -37,7 +37,11 @@ export class ScheduledForm extends React.Component {
     render() {
         let {show} = this.state
 
-        const {onTouchOutside, title, prop, hour, setHour, minute, setMinute, num, setNum, repeat, setRepeat} = this.props
+        const {onTouchOutside, title, prop, id, hour, setHour,  minute, setMinute, num, setNum, repeat, setRepeat, setConst, update} = this.props
+
+        const changeTime = () => {
+
+        }
 
         return (
             <Modal animationType={'fade'} transparent={true} visible={show} onRequestClose={this.close}>
@@ -54,7 +58,13 @@ export class ScheduledForm extends React.Component {
                     }}>
                         <View style={ styles.container }>
                             <View style={ styles.header }>
-                                <TouchableOpacity style={{width: 50, height: 50}} onPress={this.close}>
+                                <TouchableOpacity
+                                    style={{width: 50, height: 50}}
+                                    onPress={() => {
+                                        this.close();
+                                        setConst();
+                                    }}
+                                >
                                     <Icon name='times' style={{ fontSize: 20, padding: 10, color: 'black'}}/>
                                 </TouchableOpacity>
                                 <View style={{width: deviceWidth*0.73, alignItems: 'center'}}>
@@ -67,14 +77,29 @@ export class ScheduledForm extends React.Component {
                             <View style={ styles.settingEle }>
                                 <View style={{flexDirection:'row', marginBottom:10}}>
                                     <Text style={ styles.textEle }>Time: </Text>
-                                    <TextInput style={ styles.inputButton } value={hour} onChangeText={(value) => setHour(value)} keyboardType="numeric"/>
+                                    <TextInput
+                                        style={ styles.inputButton }
+                                        value={String(hour)}
+                                        onChangeText={(value) => setHour(Number(value))}
+                                        keyboardType="numeric"
+                                    />
                                     <Text style={ styles.textTime }>h :</Text>
-                                    <TextInput style={ styles.inputButton } value={minute} onChangeText={(value) => setMinute(value)} keyboardType="numeric"/>
+                                    <TextInput
+                                        style={ styles.inputButton }
+                                        value={String(minute)}
+                                        onChangeText={(value) => setMinute(Number(value))}
+                                        keyboardType="numeric"
+                                    />
                                     <Text style={ styles.textTime }>m</Text>
                                 </View>
                                 <View style={{flexDirection:'row', marginBottom:10}}>
                                     <Text style={ styles.textEle }>Reach: </Text>
-                                    <TextInput style={ styles.inputButton } value={num} onChangeText={(value) => setNum(value)} keyboardType="numeric"/>
+                                    <TextInput
+                                        style={ styles.inputButton }
+                                        value={String(num)} 
+                                        onChangeText={(value) => setNum(Number(value))}
+                                        keyboardType="numeric"
+                                    />
                                     {
                                         title==='fan' ?
                                         <Text style={ styles.textUnit }>°C</Text>
