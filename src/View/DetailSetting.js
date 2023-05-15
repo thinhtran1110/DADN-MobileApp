@@ -37,9 +37,9 @@ const DetailSetting = ({navigation, route}) => {
             <View style={{ alignItems: 'center', marginBottom: 20 }}>
 
               {
-                elementConditionList?.map((ele) => {
+                elementConditionList?.map((ele, idx) => {
                   let unit = getUnit(ele.type);
-                  return <EnvironmentSetting key={ele.name} name={ele.type} unit={unit} numFrom={ele.from} numTo={ele.to} option={ele.option} update={updateSetting}></EnvironmentSetting>
+                  return <EnvironmentSetting key={idx} name={ele.type} unit={unit} numFrom={ele.from} numTo={ele.to} option={ele.option} update={updateSetting}></EnvironmentSetting>
                 })
               }
 

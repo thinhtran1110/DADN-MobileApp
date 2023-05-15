@@ -71,9 +71,10 @@ const EnvironmentCondition = ({navigation, route}) => {
                     isActiveNow  ? 
                     <>
                         {
-                            elementConditionList?.map((ele) => {
+                            elementConditionList?.map((ele, idx) => {
                                 let [unit, curVal, option] = getConditionSetting(ele.type, ele.option);
                                 return <EnvironmentTag 
+                                        key ={idx}
                                         header={ele.type} 
                                         currentValue={curVal} 
                                         unit={unit} 

@@ -13,7 +13,7 @@ const TextUserInput = ({firstLogo, label, secondLogo, backgroundColor, placehold
                 <View style={{alignItems: 'center', flexDirection: 'row', marginRight: 10, marginLeft: 5, padding: 0}}>
                     <Icon name={firstLogo} style={{fontSize: 20, color: logoColor}}></Icon>
                 </View>
-                <TextInput style={{flex: 1, fontSize: 15, padding: 0}} placeholder={placeholder} onChangeText={onChangeText} secureTextEntry={secureTextEntry} value={value}></TextInput>
+                <TextInput style={{flex: 1, fontSize: 15, padding: 0, color: '#000'}} placeholder={placeholder} onChangeText={onChangeText} secureTextEntry={secureTextEntry} value={value}></TextInput>
                 
                 {
                     secondLogo  ? 
