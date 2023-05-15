@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useCallback } from 'react'
 import GeneralFrame from '../components/common/GeneralFrame'
+import Icon from 'react-native-vector-icons/AntDesign'
 import ScheduledIrrigate from '../components/scheduled/ScheduledIrrigate'
 import ScheduledPumpViewModel from '../ViewModel/ScheduledPumpViewModel'
 import config from '../config/config'
@@ -106,6 +107,11 @@ const ScheduledPump = ({route}) => {
             </>
             : <></>
           }
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', flex: 1}}>
+          <TouchableOpacity style={{paddingLeft: 20, paddingBottom: 20}}>
+            <Icon name={'pluscircleo'} color="#000" size={40}/>
+          </TouchableOpacity>
         </View>
       </>
     </GeneralFrame>

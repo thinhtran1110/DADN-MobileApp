@@ -103,10 +103,9 @@ const ScheduledFan = ({route}) => {
             : <></>
           }
         </View>
-        <View>
-          <TouchableOpacity style={{backgroundColor:"red"}}>
-            <Icon icon="pluscircleo" color="#000" size={50} />
-            
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'flex-end', flex: 1}}>
+          <TouchableOpacity style={{paddingLeft: 20, paddingBottom: 20}}>
+            <Icon name={'pluscircleo'} color="#000" size={40}/>
           </TouchableOpacity>
         </View>
         

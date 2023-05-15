@@ -136,6 +136,11 @@ export class ScheduledForm extends React.Component {
                                     <RadioButton PROP={prop} val={repeat} setVal={(v) => setRepeat(v)}/>
                                 </View>
                             </View>
+                            <View style={{flexDirection: 'row',  alignItems: 'flex-end', flex: 1}}>
+                                <TouchableOpacity style={{paddingLeft: 20, paddingBottom: 20}}>
+                                    <Icon name='trash-alt' color="#000" size={40}/>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </View>

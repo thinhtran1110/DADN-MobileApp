@@ -30,9 +30,9 @@ const PopupMenu = (props) => {
             <Menu
                 visible={visible}
                 anchor={
-                    <TouchableOpacity onPress={showMenu}>   
+                    <TouchableOpacity onPress={showMenu} hitSlop={{ top: 25, bottom: 25, left: 15, right: 15 }}>   
                         <View style={{alignItems:'center', justifyContent:'center'}}>
-                            <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000' }}></Icon>
+                            <Icon name={'ellipsis-v'} style={{ fontSize: 25, color: '#000'}}></Icon>
                         </View>
                     </TouchableOpacity>
                 }
