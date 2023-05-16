@@ -101,7 +101,7 @@ const ScheduledPump = ({route}) => {
 
               {
                 scheduledTimeFrame?.map((ele) => {
-                  return <ScheduledIrrigate hour={ele.hour} minute={ele.minute} repeat={ele.repeat} smt={ele.limit} on={true} />
+                  return <ScheduledIrrigate key={ele.id} hour={ele.hour} minute={ele.minute} repeat={ele.repeat} smt={ele.limit} on={true} />
                 })
               }
             </>

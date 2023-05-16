@@ -96,7 +96,7 @@ const ScheduledFan = ({route}) => {
               </View>
               {
                 scheduledTimeFrame?.map((ele) => {
-                  return <ScheduledTime id={ele.id} hour={ele.hour} minute={ele.minute} repeat={ele.repeat} temp={ele.limit} on={true} />
+                  return <ScheduledTime key={ele.id} id={ele.id} hour={ele.hour} minute={ele.minute} repeat={ele.repeat} temp={ele.limit} on={true} />
                 })
               }
             </>
