@@ -30,7 +30,7 @@ const ScheduledFan = ({route}) => {
   );
 
   return (
-    <GeneralFrame screenTitle={`Your Setting \\ ${name}`} onPress={onRefresh}>
+    <GeneralFrame screenTitle={`Your Setting \\ ${name}`} onRefresh={onRefresh}>
       <>
         <View style={ styles.container }>
           <View style={{

@@ -105,6 +105,7 @@ const ScheduledFanViewModel = (name, groupKey) => {
                 }
             );
             setScheduledTimeFrame(res.data);
+            console.log(res.data);
             return res.data;
         }
         catch(err) {
